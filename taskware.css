@@ -1,7 +1,4 @@
 body{
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
     background-color: #593d74;
     font-family: 'Roboto', sans-serif;
 }
@@ -13,15 +10,14 @@ body{
 }
 .signup-box{
     width: 360px;
-    height: 640px;
+    height: 630px;
     margin: auto;
     background-color: white;
     border-radius: 10px;
 }
 .login-box{
-    
     width: 360px;
-    height: 520px;
+    height: 500px;
     margin: auto;
     background-color: white;
     border-radius: 10px;
@@ -94,117 +90,90 @@ input[type="button"]:hover{
     border-color: #593d74;
     transition: .5s;
 }
-a{
-    text-decoration:none;
-    color:black;
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 900;
-    padding: 40px 0;
-    background:gray;
-}
-.container{
-    position: flex;
-    width: calc(var(--size) * var(--ration));
-    margin: 0 auto;
+.banner{
+    width:100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(background.jpg);
+    background-size: cover;
+    background-position: center;
 }
 .logo{
-    width: 150px;
-    padding: 10px 0;
+    width: 120px;
     cursor: pointer;
-    position:relative;
-    text-align: center;
-    border: 3px solid none;
-    color: var(--main);
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2.5px;
-    transition: all 0.2s
 }
-h3{
-    text-align: center;
-    color:black;
-    font-size: 2rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 10vmin;
-}
-
-nav{
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-nav {
+.navbar ul li{
+    list-style: none;
     display: inline-block;
-    color: white;
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-right: 0 0 0 0;
-    padding: 0 0 0 0;
-    transition: all 300ms ease-in-out;
-}
-
-nav a:hover{
-    
-    color: white;
-}
-.intro{
-    text-align: center;
-    width: 100px;
-    text-align: center;
-    overflow: hidden;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-.intro-title{
-    text-align: center;
-    color:black;
-    font-size: 4rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 10vmin;
-}
-input[type="button"]{
-    margin-right: 50px;
-    width: 50%;
-    height: 50px;
-    border:1px solid;
-    background: #593d74;
-    border-radius: 25px;
-    font-size: 20px;
-    color:white;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
-}
-input[type="button"]:hover{
-    border-color: #3e2952;
-    transition: .5s;
-    color: black;
-}
-.btn{
+    margin: 0 20px;
     position: relative;
-    right: -600px;
-    text-align: center;
-    width: 20%;
-    height: 50px;
-    border:1px solid;
-    background: white;
-    border-radius: 25px;
-    font-size: 25px;
-    color:#593d74;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
 }
-.btn:hover{
-    background: black;
+.navbar ul li a{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+}
+.navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: purple;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.navbar ul li:hover::after{
+    width: 100%;
+}
+.content{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: white;
+}
+.content h1{
+    font-size: 70px;
+    margin-top: 80px;
+}
+.content p{
+    margin:20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+input[type="btn"]{
+    position: relative;
+    top: 400px;
+    left: 500px;
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid purple;
+    background: transparent;
+    color: white;
+    cursor:pointer;
+    overflow: hidden;
+    font-size: 20px;
+}
+input[type="btn"]:hover{
     border-color: white;
     transition: .5s;
-    color: white;
+    color: purple;
 }
