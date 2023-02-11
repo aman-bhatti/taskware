@@ -129,7 +129,7 @@ input[type="button"]:hover{
     content: '';
     height: 3px;
     width: 0;
-    background: purple;
+    background: #593d74;
     position: absolute;
     left: 0;
     bottom: -10px;
@@ -165,7 +165,7 @@ input[type="btn"]{
     margin: 20px 10px;
     border-radius: 25px;
     font-weight: bold;
-    border: 2px solid purple;
+    border: 2px solid #593d74;
     background: transparent;
     color: white;
     cursor:pointer;
@@ -175,5 +175,5 @@ input[type="btn"]{
 input[type="btn"]:hover{
     border-color: white;
     transition: .5s;
-    color: purple;
+    color: #593d74;
 }
