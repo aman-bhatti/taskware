@@ -5,13 +5,9 @@
     font-family: sans-serif;
 }
 
-.full-page {
-    height: 100%;
-    width: 100%;
-    background-color: #160F1D;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
+body {
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .logo {

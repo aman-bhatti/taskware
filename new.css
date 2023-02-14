@@ -5,13 +5,9 @@
     font-family: sans-serif;
 }
 
-.full-page {
-    height: 100%;
-    width: 100%;
-    background-color: #160F1D;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
+body {
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .logo {
@@ -188,7 +184,7 @@
 }
 
 .input-group-register {
-    top: 120px;
+    top: 110px;
     position: absolute;
     width: 280px;
     transition: 0.5s;
@@ -262,5 +258,5 @@ span {
     font-size: 12px;
     color: #593d74;
     cursor: pointer;
-    padding: 3px;
+    padding: 1px 4px;
 }
