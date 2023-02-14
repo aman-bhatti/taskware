@@ -81,6 +81,7 @@
     border-right: .1em solid transparent;
     white-space: nowrap;
     letter-spacing: .08em;
+    text-align: center;
     animation:
         typewrite 5s steps(45),
         blink-caret 2s;
@@ -215,6 +216,14 @@
     outline: none;
     border-radius: 30px;
     margin: 10px auto;
+    color: white;
+}
+
+.submit-btn:hover {
+    border-color: white;
+    background-color: #593d746c;
+    transition: .5s;
+    color: #593d74;
 }
 
 .checkbox {
