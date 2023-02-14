@@ -13,10 +13,10 @@
             <img src="logo.png" class="logo">
             <nav>
                 <ul id='MenuItems'>
-                    <li><a href='#'>HOME</a></li>
-                    <li><a href='#'>ABOUT</a></li>
-                    <li><a href='#'>SERVICES</a></li>
-                    <li><a href='#'>CONNECT</a></li>
+                    <li><a href='new.html'>HOME</a></li>
+                    <li><a href='about.html'>ABOUT</a></li>
+                    <li><a href='services.html'>SERVICES</a></li>
+                    <li><a href='connect.html'>CONNECT</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,6 +33,7 @@
         <div id='login-form' class='login-page'>
             <div class="form-box">
                 <div class='button-box'>
+                    <button class="close-btn">X</button>
                     <div id='btn'></div>
                     <button type='button' onclick='login()' class='toggle-btn'>Log In</button>
                     <button type="button" onclick="register()" class='toggle-btn'>Register</button>
@@ -80,6 +81,12 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        });
+    </script>
+    <script>
+        const closeBtn = document.querySelector(".close-btn");
+        closeBtn.addEventListener("click", function () {
+            document.querySelector("#login-form").style.display = "none";
         });
     </script>
 </body>
