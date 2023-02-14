@@ -212,7 +212,7 @@
     cursor: pointer;
     display: block;
     background: #593d74;
-    border: 0;
+    border: 2px solid #593d74;
     outline: none;
     border-radius: 30px;
     margin: 10px auto;
@@ -220,8 +220,8 @@
 }
 
 .submit-btn:hover {
-    border-color: white;
-    background-color: #593d746c;
+    border-color: #593d74;
+    background-color: white;
     transition: .5s;
     color: #593d74;
 }
