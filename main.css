@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.logo {
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar {
+    position: relative;
+    width: 97%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #593d74;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-color: #160F1D;
+    background-size: cover;
+    background-position: center;
+}
+
+.content {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    color: white;
+}
+
+.content h1 {
+    font-size: 100px;
+    font-weight: normal;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    border-right: .1em solid transparent;
+    white-space: nowrap;
+    letter-spacing: .08em;
+    text-align: center;
+    animation:
+        typewrite 5s steps(45),
+        blink-caret 2s;
+}
+
+@keyframes typewrite {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: #593d74;
+    }
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+.loginbtn {
+    display: block;
+    margin: 40px auto;
+    padding: 15px 60px;
+    text-align: center;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #593d74;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 20px;
+}
+
+.loginbtn:hover {
+    border-color: white;
+    background-color: white;
+    transition: .5s;
+    color: #593d74;
+}
+
+#login-form {
+    display: none;
+    background-color: #160F1D;
+    padding-bottom: 20px;
+}
+
+.form-box {
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 2% auto;
+    background: white;
+    overflow: scroll;
+}
+
+.button-box {
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #dcb6ff;
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: #593d74;
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+.input-group-login {
+    top: 120px;
+    position: absolute;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.input-group-register {
+    top: 110px;
+    position: absolute;
+    width: 280px;
+    transition: 0.5s;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+
+.submit-btn {
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    background: #593d74;
+    border: 2px solid #593d74;
+    outline: none;
+    border-radius: 30px;
+    margin: 10px auto;
+    color: white;
+}
+
+.submit-btn:hover {
+    border-color: #593d74;
+    background-color: white;
+    transition: .5s;
+    color: #593d74;
+}
+
+.checkbox {
+    margin: 30px 10px 10px 0;
+}
+
+span {
+    color: black;
+    font-size: 12px;
+    bottom: 65px;
+    position: absolute;
+}
+
+#login {
+    left: 50px;
+}
+
+#login input {
+    color: black;
+    font-size: 30;
+}
+
+#register {
+    left: 450px;
+}
+
+#register input {
+    color: black;
+    font-size: 30;
+}
+
+.close-btn {
+    position: absolute;
+    left: 275px;
+    bottom: 40px;
+    font-size: 12px;
+    color: #593d74;
+    cursor: pointer;
+    padding: 1px 4px;
+}
