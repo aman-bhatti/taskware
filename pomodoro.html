@@ -35,24 +35,7 @@
                 <i class="ri-inbox-archive-fill"></i>
                 <p>welcome back, ✨<u>USER</u>✨</p>
 
-                <div class="datetime-box">
-                    <p class="date">
-                        <span id="month"></span> <span id="day"></span>
-                    </p>
-                    <p class="time" id="time"></p>
-                </div>
 
-                <script>
-                    var dt = new Date();
-                    var month = dt.toLocaleString('default', { month: 'long' });
-                    var day = dt.getDate();
-                    var time = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-                    document.getElementById("month").innerHTML = month;
-                    document.getElementById("day").innerHTML = day;
-                    document.getElementById("time").innerHTML = time;
-                </script>
-            </div>
 
 
 
@@ -79,7 +62,7 @@
                         <a href="toDo.html">
                             <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
                         </a>
-                        <a href="#">
+                        <a href="notes.html">
                             <li class="aside-item"><i class="ri-sticky-note-fill"></i>notes</li>
                         </a>
                         <a href="pomodoro.html">
@@ -88,7 +71,7 @@
                         <a href="#">
                             <li class="aside-item"><i class="ri-contacts-book-2-fill"></i>contacts</li>
                         </a>
-                        <a href="#">
+                        <a href="weather.html">
                             <li class="aside-item"><i class="ri-cloud-fill"></i>weather</li>
                         </a>
                     </ul>
@@ -108,57 +91,7 @@
             </aside>
             <article class="content-container">
 
-                <script>
-                    (function (d, s, id) {
-                        if (d.getElementById(id)) {
-                            if (window.__TOMORROW__) {
-                                window.__TOMORROW__.renderWidget();
-                            }
-                            return;
-                        }
-                        const fjs = d.getElementsByTagName(s)[0];
-                        const js = d.createElement(s);
-                        js.id = id;
-                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
-
-                        fjs.parentNode.insertBefore(js, fjs);
-                    })(document, 'script', 'tomorrow-sdk');
-                </script>
-
-                <div class="tomorrow" data-location-id="" data-language="EN" data-unit-system="IMPERIAL"
-                    data-skin="dark" data-widget-type="upcoming" style="padding-bottom:22px;position:relative;">
-                    <a href="https://www.tomorrow.io/weather-api/" rel="nofollow noopener noreferrer" target="_blank"
-                        style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;">
-                        <img alt="Powered by the Tomorrow.io Weather API"
-                            src="https://weather-website-client.tomorrow.io/img/powered-by.svg" width="250"
-                            height="18" />
-                    </a>
-                </div>
-                <div class="dueSoon">
-                    <h2>Due This Week</h2>
-                    <ul>
-                        <li>
-                            <input type="checkbox" id="item1" name="item1" value="Finish project report">
-                            <label for="item1">Finish project report - March 1, 2023</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="item2" name="item2" value="Buy groceries">
-                            <label for="item2">Buy groceries - March 3, 2023</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="item3" name="item3" value="Submit application">
-                            <label for="item3">Submit application - March 5, 2023</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="item4" name="item4" value="Pay rent">
-                            <label for="item4">Pay rent - March 7, 2023</label>
-                        </li>
-                        <li>
-                            <input type="checkbox" id="item5" name="item5" value="Book flight tickets">
-                            <label for="item5">Book flight tickets - March 10, 2023</label>
-                        </li>
-                    </ul>
-                </div>
+                <!-- code here -->
 
             </article>
         </section>

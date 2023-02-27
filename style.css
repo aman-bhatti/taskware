@@ -117,6 +117,10 @@ aside {
     float: left;
 }
 
+#calendar {
+    margin-left: 10px;
+}
+
 aside ul a {
     text-decoration: none;
 }
@@ -314,15 +318,16 @@ table thead th {
 }
 
 .dueSoon {
-    margin-top: 15px;
-    background-color: #45434361;
-    border-radius: 5px;
+    /* margin-top: 15px; */
+    background-color: #131224;
+    border-radius: 16px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 30px;
     padding-bottom: 50px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     width: 50%;
+    margin: 20px auto;
 }
 
 .dueSoon h2 {
@@ -383,12 +388,8 @@ table thead th {
     border-bottom: none;
 }
 
-.dueSoon li:nth-child(even) {
-    background-color: #45434361;
-}
-
 .dueSoon li:hover {
-    background-color: var(--primary-90);
+    background-color: #1e1c3a6c;
     cursor: pointer;
 }
 
