@@ -4,12 +4,12 @@
 }
 
 :root {
-    --primary-color: #18181b;
+    --primary-color: #160F1D;
     --primary-90: #1f1f1f;
     --primary-80: #454343;
     --primary-50: #545d5a;
     --secondary-color: #545d5a;
-    --text-white: rgb(244, 244, 244);
+    --text-white: #c5c5c5;
     --text-gray: #979797;
 }
 
@@ -19,37 +19,41 @@ body {
 }
 
 header {
-    background: linear-gradient(45deg, #8a3c9d, #8b409b);
+    background-color: black;
     padding: 0 40px;
 }
+
 header .brand {
     display: flex;
     align-items: center;
 }
+
 header .brand img {
     height: 40px;
 }
+
 nav {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-  
+
 nav li {
     float: left;
 }
-  
+
 nav li:last-child {
     border-right: none;
 }
-  
+
 nav li a {
     display: block;
     color: rgb(240, 240, 240);
@@ -71,9 +75,11 @@ nav li a:hover:not(.nav-active) {
 main {
     padding: 20px 40px;
 }
+
 .section-title {
     color: var(--text-white);
 }
+
 .top-bar {
     margin-top: 10px;
     display: flex;
@@ -85,8 +91,18 @@ main {
     border-radius: 5px;
     padding: 10px;
 }
+
 .top-bar u {
-    color: #f05853;
+    color: #8e60ba;
+    text-decoration: none;
+}
+
+.top-bar p {
+    font-size: 16px;
+}
+
+.ri-inbox-archive-fill {
+    margin-left: 15px;
 }
 
 .content-section {
@@ -94,10 +110,16 @@ main {
     gap: 20px;
     margin-top: 10px;
 }
+
 aside {
     width: 25%;
     float: left;
 }
+
+aside ul a {
+    text-decoration: none;
+}
+
 .sidebar-heading {
     min-height: 100px;
     background: var(--text-gray);
@@ -106,17 +128,20 @@ aside {
     justify-content: center;
     padding: 8px;
 }
-.sidebar-heading h3{
+
+.sidebar-heading h3 {
     display: flex;
     gap: 5px;
     align-items: center;
     justify-content: center;
 }
-.sidebar-heading p{
+
+.sidebar-heading p {
     text-align: center;
     margin-top: 3px;
     font-size: 12px;
 }
+
 .btn-container {
     display: flex;
     flex-direction: row;
@@ -125,6 +150,7 @@ aside {
     gap: 10px;
     margin-top: 10px;
 }
+
 .btn-container button {
     width: 30px;
     height: 25px;
@@ -135,10 +161,12 @@ aside {
     outline: none;
     cursor: pointer;
 }
+
 .sidebar-wrapper ul {
     list-style: none;
     background: var(--primary-90);
 }
+
 .sidebar-wrapper ul li {
     display: flex;
     flex-direction: row;
@@ -150,6 +178,7 @@ aside {
     padding: 5px 10px;
     cursor: pointer;
 }
+
 .sidebar-wrapper ul li:hover {
     background: var(--primary-80);
     color: var(--text-white);
@@ -158,20 +187,25 @@ aside {
 .sidebar-wrapper ul li:hover a {
     color: var(--text-white);
 }
+
 .aside-active {
     background: var(--primary-80);
     color: var(--text-white);
 }
+
 .sidebar-wrapper ul li a {
     text-decoration: none;
     color: var(--text-gray);
 }
+
 .sidebar-wrapper ul li a u {
     color: #f05853;
 }
+
 .sidebar-footer {
-    padding: 3px ;
+    padding: 3px;
 }
+
 .footer-item {
     display: flex;
     align-items: center;
@@ -181,14 +215,19 @@ aside {
     font-size: larger;
     font-weight: 600;
     color: var(--text-white);
+    font-size: 17px;
 }
+
 .footer-item a {
     text-decoration: none;
     color: var(--text-white);
 }
-.footer-item:hover, .footer-item a:hover {
+
+.footer-item:hover,
+.footer-item a:hover {
     color: var(--text-gray);
 }
+
 .command-input {
     height: 40px;
     width: 100%;
@@ -217,6 +256,7 @@ article {
     padding: 5px 0 0 0;
     color: var(--text-gray);
 }
+
 .tab-bar .tab-item {
     display: flex;
     flex-direction: row;
@@ -245,27 +285,139 @@ article {
     font-weight: 600;
     color: var(--text-gray);
 }
+
 .fc-day-number {
     width: 1rem;
 }
+
 .fc-daygrid-day-number {
     color: white;
     font-weight: 500;
     font-size: large;
 }
-table thead th{
+
+table thead th {
     height: 40px;
     align-items: center;
     color: var(--text-gray);
 }
+
 .fc .fc-daygrid-day.fc-day-today {
     background: none;
 }
+
 .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
     background: #f05853;
     border-radius: 50%;
     padding: 10px 12px;
 }
-.fc tr td:nth-child(7){
-    background: var(--primary-90);
+
+.dueSoon {
+    margin-top: 15px;
+    background-color: #45434361;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.dueSoon h2 {
+    color: var(--text-white);
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.dueSoon table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.dueSoon th,
+.dueSoon td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--primary-50);
+}
+
+.dueSoon th {
+    background-color: var(--primary-80);
+    color: var(--text-white);
+}
+
+.dueSoon tr:nth-child(even) {
+    background-color: var(--primary-50);
+}
+
+.dueSoon tr:hover {
+    background-color: var(--primary-80);
+}
+
+.dueSoon li {
+    font-size: 18px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--primary-50);
+}
+
+.dueSoon li:nth-child(1) {
+    color: #e34f4f;
+}
+
+.dueSoon li:nth-child(2) {
+    color: #e34f4f;
+}
+
+.dueSoon li:nth-child(3) {
+    color: #e3d94f;
+}
+
+.dueSoon li:nth-child(n+4) {
+    color: var(--text-white);
+}
+
+.dueSoon li:last-child {
+    border-bottom: none;
+}
+
+.dueSoon li:nth-child(even) {
+    background-color: #45434361;
+}
+
+.dueSoon li:hover {
+    background-color: var(--primary-90);
+    cursor: pointer;
+}
+
+.dueSoon li.checked {
+    text-decoration: line-through;
+    color: var(--text-gray);
+}
+
+.dueSoon input[type=checkbox] {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.dueSoon input[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+.dueSoon ul {
+    list-style: none;
+}
+
+.dueSoon input[type=checkbox]:checked+label {
+    text-decoration: line-through;
+    color: var(--text-gray);
+}
+
+.datetime-box {
+    padding: 10px;
+    font-family: monospace;
+    font-size: 20px;
+    color: var(--text-white);
+    margin-left: 70%;
 }

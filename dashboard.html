@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -17,27 +20,48 @@
                 <a href="main.html"><img src="logo.png" class="logo"></a>
             </div>
             <ul>
-                <li><a class="nav-link nav-active" href="#home">Home</a></li>
-                <li><a class="nav-link" href="#about" onclick="activeLink(this)">About</a></li>
-                <li><a class="nav-link" href="#services">Services</a></li>
-                <li><a class="nav-link" href="#contact">Contact</a></li>
+                <li><a class="nav-link" href="main.html">HOME</a></li>
+                <li><a class="nav-link" href="about.html">ABOUT</a></li>
+                <li><a class="nav-link" href="services.html">SERVICES</a></li>
+                <li><a class="nav-link" href="connect.html">CONNECT</a></li>
+                <li><a class="nav-link" href="dashboard.html">DASHBOARD</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section class="top-section">
-            <h1 class="section-title">Taskware Developers</h1>
             <div class="top-bar">
                 <i class="ri-inbox-archive-fill"></i>
-                <p><u>welcome</u> back, team</p>
+                <p>welcome back, ✨<u>USER</u>✨</p>
+
+                <div class="datetime-box">
+                    <p class="date">
+                        <span id="month"></span> <span id="day"></span>
+                    </p>
+                    <p class="time" id="time"></p>
+                </div>
+
+                <script>
+                    var dt = new Date();
+                    var month = dt.toLocaleString('default', { month: 'long' });
+                    var day = dt.getDate();
+                    var time = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    document.getElementById("month").innerHTML = month;
+                    document.getElementById("day").innerHTML = day;
+                    document.getElementById("time").innerHTML = time;
+                </script>
             </div>
+
+
+
         </section>
         <section class="content-section">
             <aside class="side-bar">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-heading">
-                        <h3>Streak ⚡</h3>
+                        <h3>Streak⚡</h3>
                         <div class="btn-container">
                             <button id="minus-btn">-</button>
                             <h3 id="streak-counter"></h3>
@@ -46,10 +70,27 @@
                         <p>some</p>
                     </div>
                     <ul>
-                        <li class="aside-item aside-active"><i class="ri-macbook-line"></i> <a href="#">curriculum</a></li>
-                        <li class="aside-item"><i class="ri-timer-fill"></i> <a href="#"><u>promodor</u> timer</a></li>
-                        <li class="aside-item"><i class="ri-contacts-book-2-fill"></i> <a href="#">contacts</a></li>
-                        <li class="aside-item"><i class="ri-cloud-fill"></i> <a href="#">weather</a></li>
+                        <a href="dashboard.html">
+                            <li class="aside-item aside-active"><i class="ri-macbook-line"></i>home</li>
+                        </a>
+                        <a href="calendar.html">
+                            <li class="aside-item"><i class="ri-calendar-fill"></i>calendar</li>
+                        </a>
+                        <a href="toDo.html">
+                            <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
+                        </a>
+                        <a href="#">
+                            <li class="aside-item"><i class="ri-sticky-note-fill"></i>notes</li>
+                        </a>
+                        <a href="#">
+                            <li class="aside-item"><i class="ri-timer-fill"></i>promodor timer</li>
+                        </a>
+                        <a href="#">
+                            <li class="aside-item"><i class="ri-contacts-book-2-fill"></i>contacts</li>
+                        </a>
+                        <a href="#">
+                            <li class="aside-item"><i class="ri-cloud-fill"></i>weather</li>
+                        </a>
                     </ul>
                     <div class="sidebar-footer">
                         <div class="footer-item">
@@ -58,7 +99,7 @@
                         </div>
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="#">login</a>
+                            <a href="#">account</a>
                         </div>
 
                         <input id="command" class="command-input" type="text" placeholder="Type '/' for commands">
@@ -66,44 +107,69 @@
                 </div>
             </aside>
             <article class="content-container">
-                <div class="content-wrapper">
-                    <div class="tab-bar">
-                        <div class="tab-item tab-active">
-                            <i class="ri-calendar-line"></i>
-                            Calender
-                        </div>
-                        <div class="tab-item">
-                            <i class="ri-sort-asc"></i>
-                            Review
-                        </div>
-                        <div class="tab-item">
-                            <i class="ri-file-list-line"></i>
-                            Assignment
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div id='calendar'></div>
-                    </div>
+
+                <script>
+                    (function (d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow" data-location-id="" data-language="EN" data-unit-system="IMPERIAL"
+                    data-skin="dark" data-widget-type="upcoming" style="padding-bottom:22px;position:relative;">
+                    <a href="https://www.tomorrow.io/weather-api/" rel="nofollow noopener noreferrer" target="_blank"
+                        style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;">
+                        <img alt="Powered by the Tomorrow.io Weather API"
+                            src="https://weather-website-client.tomorrow.io/img/powered-by.svg" width="250"
+                            height="18" />
+                    </a>
                 </div>
+                <div class="dueSoon">
+                    <h2>Due Soon</h2>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="item1" name="item1" value="Finish project report">
+                            <label for="item1">Finish project report - March 1, 2023</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="item2" name="item2" value="Buy groceries">
+                            <label for="item2">Buy groceries - March 3, 2023</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="item3" name="item3" value="Submit application">
+                            <label for="item3">Submit application - March 5, 2023</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="item4" name="item4" value="Pay rent">
+                            <label for="item4">Pay rent - March 7, 2023</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="item5" name="item5" value="Book flight tickets">
+                            <label for="item5">Book flight tickets - March 10, 2023</label>
+                        </li>
+                    </ul>
+                </div>
+
             </article>
         </section>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-            });
-            calendar.render();
-        });
-    </script>
     <script src="dashboard.js"></script>
     <script>
         function activeLink(link) {
-  $('a').removeClass('active');
-  $(link).addClass('active');
-}
+            $('a').removeClass('active');
+            $(link).addClass('active');
+        }
     </script>
 </body>
+
 </html>
