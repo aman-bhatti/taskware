@@ -35,9 +35,29 @@
             <div class="top-bar">
                 <i class="ri-inbox-archive-fill"></i>
                 <p>welcome back, ✨<u>USER</u>✨</p>
+
+                <div class="datetime-box">
+                    <p class="date">
+                        <span id="month"></span> <span id="day"></span>
+                    </p>
+                    <p class="time" id="time"></p>
+                </div>
+
+                <script>
+                    var dt = new Date();
+                    var month = dt.toLocaleString('default', { month: 'long' });
+                    var day = dt.getDate();
+                    var time = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    document.getElementById("month").innerHTML = month;
+                    document.getElementById("day").innerHTML = day;
+                    document.getElementById("time").innerHTML = time;
+                </script>
             </div>
+
+
+
         </section>
-        <section class="content-section">
             <aside class="side-bar">
                 <div class="sidebar-wrapper">
                     <div class="sidebar-heading">
