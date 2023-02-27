@@ -419,5 +419,5 @@ table thead th {
     font-family: monospace;
     font-size: 20px;
     color: var(--text-white);
-    margin-left: 70%;
+    margin-left: auto;
 }
