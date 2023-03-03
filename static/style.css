@@ -423,3 +423,15 @@ table thead th {
     color: var(--text-white);
     margin-left: auto;
 }
+
+.msg {
+    color: white;
+}
+
+#log-info.word {
+    color: white;
+}
+
+#bottom-info.bottom {
+    color: white;
+}
