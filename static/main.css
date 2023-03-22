@@ -141,7 +141,7 @@ body {
 
 .form-box {
     width: 380px;
-    height: 480px;
+    height: 550px;
     position: relative;
     margin: 2% auto;
     background: white;
@@ -259,4 +259,18 @@ span {
     color: #593d74;
     cursor: pointer;
     padding: 1px 4px;
+}
+
+.g-signin2 {
+    position: absolute;
+    margin-left: 85px;
+    margin-top: 20px;
+}
+
+
+
+.msg,
+.reg-info,
+.bottom-info {
+    color: white;
 }

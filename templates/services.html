@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Services page</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 
 <body>
@@ -13,10 +13,10 @@
             <a href="main.html"><img src="logo.png" class="logo"></a>
             <nav>
                 <ul id='MenuItems'>
-                    <li><a href='main.html'>HOME</a></li>
-                    <li><a href='about.html'>ABOUT</a></li>
-                    <li><a href='services.html'>SERVICES</a></li>
-                    <li><a href='connect.html'>CONNECT</a></li>
+                    <li><a href="{{url_for('main')}}">HOME</a></li>
+                    <li><a href="{{url_for('about')}}">ABOUT</a></li>
+                    <li><a href="{{url_for('services')}}">SERVICES</a></li>
+                    <li><a href="{{url_for('connect')}}">CONNECT</a></li>
                 </ul>
             </nav>
         </div>
