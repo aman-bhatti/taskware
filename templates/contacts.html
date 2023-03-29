@@ -1,122 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='./style.css') }}"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav>
-            <div class="brand">
-                <a href="{{url_for('main')}}"><img src="logo.png" class="logo"></a>
-            </div>
-            <ul>
-                <li><a class="nav-link" href="{{url_for('main')}}">HOME</a></li>
-                <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
-                <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
-                <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
-                <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <div class="brand">
+          <a href="main.html"><img src="logo.png" class="logo" /></a>
+        </div>
+        <ul>
+          <li><a class="nav-link" href="main">HOME</a></li>
+          <li><a class="nav-link" href="about">ABOUT</a></li>
+          <li><a class="nav-link" href="services">SERVICES</a></li>
+          <li><a class="nav-link" href="connect">CONNECT</a></li>
+          <li><a class="nav-link" href="dashboard">DASHBOARD</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
-        <section class="top-section">
-            <div class="top-bar">
-                <i class="ri-inbox-archive-fill"></i>
-                <p>welcome back, ✨<u>{{session.username}}</u>✨</p>
+      <section class="top-section">
+        <div class="top-bar">
+          <i class="ri-inbox-archive-fill"></i>
+          <p>welcome back, ✨<u>USER</u>✨</p>
 
-                <div class="datetime-box">
-                    <p class="date">
-                        <span id="month"></span> <span id="day"></span>
-                    </p>
-                    <p class="time" id="time"></p>
-                </div>
+          <div class="datetime-box">
+            <p class="date"><span id="month"></span> <span id="day"></span></p>
+            <p class="time" id="time"></p>
+          </div>
 
-                <script>
-                    var dt = new Date();
-                    var month = dt.toLocaleString('default', { month: 'long' });
-                    var day = dt.getDate();
-                    var time = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          <script>
+            var dt = new Date();
+            var month = dt.toLocaleString("default", { month: "long" });
+            var day = dt.getDate();
+            var time = dt.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
 
-                    document.getElementById("month").innerHTML = month;
-                    document.getElementById("day").innerHTML = day;
-                    document.getElementById("time").innerHTML = time;
-                </script>
+            document.getElementById("month").innerHTML = month;
+            document.getElementById("day").innerHTML = day;
+            document.getElementById("time").innerHTML = time;
+          </script>
+        </div>
+      </section>
+      <section class="content-section">
+        <aside class="side-bar">
+          <div class="sidebar-wrapper">
+            <div class="sidebar-heading">
+              <h3>Streak⚡</h3>
+              <div class="btn-container">
+                <button id="minus-btn">-</button>
+                <h3 id="streak-counter"></h3>
+                <button id="plus-btn">+</button>
+              </div>
+              <p>some</p>
             </div>
+            <ul>
+              <a href="dashboard.html">
+                <li class="aside-item"><i class="ri-macbook-line"></i>home</li>
+              </a>
+              <a href="calendar.html">
+                <li class="aside-item">
+                  <i class="ri-calendar-fill"></i>calendar
+                </li>
+              </a>
+              <a href="toDo.html">
+                <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
+              </a>
+              <a href="notes.html">
+                <li class="aside-item">
+                  <i class="ri-sticky-note-fill"></i>notes
+                </li>
+              </a>
+              <a href="pomodoro.html">
+                <li class="aside-item">
+                  <i class="ri-timer-fill"></i>pomodoro timer
+                </li>
+              </a>
+              <a href="contacts.html">
+                <li class="aside-item aside-active">
+                  <i class="ri-contacts-book-2-fill"></i>contacts
+                </li>
+              </a>
+            </ul>
+            <div class="sidebar-footer">
+              <div class="footer-item">
+                <i class="ri-play-mini-fill"></i>
+                <a href="#">to-do list</a>
+              </div>
+              <div class="footer-item">
+                <i class="ri-play-mini-fill"></i>
+                <a href="#">account</a>
+              </div>
+
+              <input
+                id="command"
+                class="command-input"
+                type="text"
+                placeholder="Type '/' for commands"
+              />
+            </div>
+          </div>
+        </aside>
+        <article class="content-containr">
+          <!-- code here -->
+          <input type="search" name="search" id="search" placeholder="Search Here"/>
+          
+          <!-- code here -->
+          <!-- start -->
+          <div class="contacts-container">
+              <input type="text" name="name" id="name" placeholder="Enter name here"/>
+              <input type="text" name="contact" id="contact" placeholder="Enter number here"/>
+              <button id="save-contact-btn">Save</button>
+        </div>
 
 
-
-        </section>
-        <section class="content-section">
-            <aside class="side-bar">
-                <div class="sidebar-wrapper">
-                    <div class="sidebar-heading">
-                        <h3>Streak⚡</h3>
-                        <div class="btn-container">
-                            <button id="minus-btn">-</button>
-                            <h3 id="streak-counter"></h3>
-                            <button id="plus-btn">+</button>
-                        </div>
-                        <p>some</p>
-                    </div>
-                    <ul>
-                        <a href="{{url_for('dashboard')}}">
-                            <li class="aside-item"><i class="ri-macbook-line"></i>home</li>
-                        </a>
-                        <a href="{{url_for('calendar')}}">
-                            <li class="aside-item"><i class="ri-calendar-fill"></i>calendar</li>
-                        </a>
-                        <a href="{{url_for('toDo')}}">
-                            <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
-                        </a>
-                        <a href="{{url_for('notes')}}">
-                            <li class="aside-item"><i class="ri-sticky-note-fill"></i>notes</li>
-                        </a>
-                        <a href="{{url_for('pomodoro')}}">
-                            <li class="aside-item"><i class="ri-timer-fill"></i>pomodoro timer</li>
-                        </a>
-                        <a href="{{url_for('contacts')}}">
-                            <li class="aside-item aside-active"><i class="ri-contacts-book-2-fill"></i>contacts</li>
-                        </a>
-                    </ul>
-                    <div class="sidebar-footer">
-                        <div class="footer-item">
-                            <i class="ri-play-mini-fill"></i>
-                            <a href="#">to-do list</a>
-                        </div>
-                        <div class="footer-item">
-                            <i class="ri-play-mini-fill"></i>
-                            <a href="#">account</a>
-                        </div>
-
-                        <input id="command" class="command-input" type="text" placeholder="Type '/' for commands">
-                    </div>
-                </div>
-            </aside>
-            <article class="content-container">
-
-                <!-- code here -->
-
-            </article>
-        </section>
+          <div class="main">
+            {% block body %}
+            <table>
+              <tr>
+                <th>Name</th>
+                <th id="spec">Contact Number</th>
+              </tr>
+              {% for contact in contacts %}
+              <tr>
+                <td>{{ contact.name }}</td>
+                <td id="fade">{{ contact.contact }}</td>
+              </tr>
+              {% endfor %} {% endblock %}
+            </table>
+          </div>
+        </article>
+      </section>
     </main>
-    <script src="{{url_for('static', filename='dashboard.js')}}"></script>
+    <script src="dashboard.js"></script>
     <script>
-        function activeLink(link) {
-            $('a').removeClass('active');
-            $(link).addClass('active');
-        }
+        const name = document.getElementById("name");
+        const contact = document.getElementById("contact");
+        const saveNoteBtn = document.getElementById("save-contact-btn");
+  
+        
+  
+       
+  
+        saveNoteBtn.addEventListener("click", () => {
+          const contacts = {
+            name: name.value,
+            contact: contact.value,
+          };
+  
+          // make an AJAX request to the server-side script
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", "http://127.0.0.1:5000/save-contact", true);
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.onload = () => {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+            } else {
+              console.error(xhr.statusText);
+            }
+          };
+          xhr.send(JSON.stringify(contacts));
+  
+          name.value = "";
+          contact.value = "";
+        });
+      </script>
+    <script>
+      function activeLink(link) {
+        $("a").removeClass("active");
+        $(link).addClass("active");
+      }
     </script>
-</body>
-
+  </body>
 </html>
