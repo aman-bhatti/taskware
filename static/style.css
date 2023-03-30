@@ -424,14 +424,255 @@ table thead th {
     margin-left: auto;
 }
 
-.msg {
+
+
+
+/* new starts here */
+
+.notes-container {
+    position: relative;
+    margin: 20px;
+}
+
+#add-note-btn {
+    padding: 10px 20px;
+    background-color: #593d74;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-note-box {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #412f52;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+textarea {
+    color: black;
+    background-color: rgb(161, 161, 161);
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(100, 100, 100);
+    resize: none;
+}
+
+label {
+    display: block;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+select {
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(88, 87, 87);
+    padding: 5px;
+}
+
+#save-note-btn {
+    padding: 5px 10px;
+    background-color: #2a5f97;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#cancel-note-btn {
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: rgb(141, 34, 34);
+}
+
+#newDiv {
+    margin-top: 20rem;
+}
+
+#newDiv>ul {
+    list-style: none;
     color: white;
 }
 
-#log-info.word {
+#newDiv>ul>li {
+    list-style: none;
     color: white;
+    padding: .5rem;
+    box-shadow: .3px .4px 1px white;
+    margin: 8px;
 }
 
-#bottom-info.bottom {
+#newDiv>h1 {
+    text-align: center;
+    padding: 2px;
+    color: wheat;
+    margin-bottom: 1rem;
+}
+
+.priority-high {
+    background-color: red;
+    color: red;
+}
+
+.priority-medium {
+    background-color: orange;
+    color: orange;
+}
+
+.priority-low {
+    background-color: green;
+    color: green;
+}
+
+.content-containr {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.content-containr #search {
+    width: 60.7%;
+    font-size: 16px;
+    height: 2.4rem;
+    padding: .3rem;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 1rem;
+    border-radius: 3px;
+    padding-left: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.content-containr .main {
+    width: 90%;
+    display: flex;
     color: white;
+    padding: 2rem;
+    align-items: center;
+    transition: all .3s ease;
+    margin-top: 8rem;
+}
+
+.content-containr .main>table {
+    width: 100%;
+}
+
+.main>table>tbody>tr {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: .3px .5px 4px gray;
+    margin: 6px;
+    padding: .7rem 1rem;
+}
+
+.main>table>tbody:hover {
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+#fade {
+    transition: 1s ease;
+    visibility: hidden;
+    opacity: 0;
+    margin-right: 1rem;
+}
+
+.main>table>tbody>tr>td {
+    transition: all .5s ease;
+}
+
+.main>table>tbody>tr>td:hover+#fade {
+    opacity: 1;
+    cursor: pointer;
+    transition: all .5s ease;
+    display: inline-block;
+    visibility: visible;
+    transform: translateX(1rem);
+}
+
+.main>table>tbody>tr>td:hover+.main>table>tbody>tr {
+    display: flex;
+    justify-content: space-around;
+}
+
+.contacts-container {
+    position: absolute;
+    top: 5rem;
+}
+
+.contacts-container>input {
+    font-size: 14px;
+    outline: none;
+    padding: .5rem 1rem;
+    margin: 1rem .6rem;
+    border-radius: 4px;
+    border: none;
+    width: 31%;
+}
+
+#search-btn {
+    padding: 10px 19px;
+    background-color: #2a5f97;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+#save-contact-btn {
+    padding: 10px 25px;
+    background-color: #2a5f97;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    margin-left: .2rem;
+}
+
+#search-with-button {
+    position: absolute;
+    top: 1rem;
+    left: 17.3%;
+    width: 64%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search-bar-style {
+    font-size: 14px;
+    outline: none;
+    padding: .5rem 1rem;
+    margin: 1rem;
+    border-radius: 4px;
+    border: none;
+    width: 80%;
 }
