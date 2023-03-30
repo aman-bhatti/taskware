@@ -153,7 +153,7 @@ def saveNote():
     text = requestData.get('text')
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute(
-        "insert into notes(text, priority) value (%s,%s)", (text, priority))
+        "INSERT INTO notes (text, priority) value (%s,%s)", (text, priority))
     mysql.connection.commit()
     return redirect(url_for('notes'))
 
