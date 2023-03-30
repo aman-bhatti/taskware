@@ -531,8 +531,8 @@ select {
 }
 
 .priority-high {
-    background-color: red;
-    color: red;
+    background-color: green;
+    color: green;
 }
 
 .priority-medium {
@@ -541,8 +541,8 @@ select {
 }
 
 .priority-low {
-    background-color: green;
-    color: green;
+    background-color: red;
+    color: red;
 }
 
 .content-containr {
