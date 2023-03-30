@@ -145,7 +145,7 @@
             <h1>Notes</h1>
             {% block body %}
             <ul>
-              {% for priority in ['low', 'medium', 'high'] %}
+              {% for priority in ['high', 'medium', 'low'] %}
                 {% for note in notes if note.priority == priority %}
                   <li class="priority-{{ note.priority }}">{{ note.text }}</li>
                 {% endfor %}
