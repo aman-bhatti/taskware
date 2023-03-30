@@ -111,6 +111,10 @@ body {
     line-height: 25px;
 }
 
+.log-info{
+    color: white;
+}
+
 .loginbtn {
     display: block;
     margin: 40px auto;
