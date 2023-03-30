@@ -50,6 +50,8 @@ def login():
             session['username'] = account['username']
             msg = 'Logged in successfully !'
             return render_template('dashboard.html', msg=msg)
+        if 'loggedin' in session:
+            return redirect('dashboard.html')
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
