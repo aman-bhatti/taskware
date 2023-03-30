@@ -52,7 +52,7 @@ def login():
             return render_template('dashboard.html', msg=msg)
         else:
             msg = 'Incorrect username / password !'
-    return render_template('dashboard.html', msg=msg)
+    return render_template('login.html', msg=msg)
 
 
 @app.route('/logout')
