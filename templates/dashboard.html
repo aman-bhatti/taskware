@@ -17,14 +17,14 @@
     <header>
         <nav>
             <div class="brand">
-                <a href="main.html"><img src="/logo.png" class="logo"></a>
+                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
             </div>
             <ul>
-                <li><a class="nav-link" href="{{url_for('main')}}">HOME</a></li>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
                 <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
                 <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
                 <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
+                <li><a class="nav-link" href="{{url_for('main')}}">LOGOUT</a></li>
             </ul>
         </nav>
     </header>
@@ -92,17 +92,17 @@
                     <div class="sidebar-footer">
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="#">to-do list</a>
+                            <a href="{{url_for('profile')}}">Setting</a>
                         </div>
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="#">account</a>
+                            <a href="{{url_for('main')}}" class="btn">Logout</a>
                         </div>
-                        <div class="footer-item">
-                            <a href="{{ url_for('logout') }}" class="btn">Logout</a>
-                        </div>
-
-                        <input id="command" class="command-input" type="text" placeholder="Type '/' for commands">
+                        <form class="search-form">
+                            <input type="text" name="search" placeholder="Search...">
+                            <button id="submit">Submit</button>
+                        </form>
+                         
                     </div>
                 </div>
             </aside>
