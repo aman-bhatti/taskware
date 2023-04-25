@@ -111,6 +111,10 @@ body {
     line-height: 25px;
 }
 
+.log-info{
+    color: white;
+}
+
 .loginbtn {
     display: block;
     margin: 40px auto;
@@ -266,11 +270,9 @@ span {
     margin-left: 85px;
     margin-top: 20px;
 }
-
-
-
-.msg,
-.reg-info,
-.bottom-info {
-    color: white;
+h1 {
+    text-align: center;
+    padding: 2px;
+    color: rgb(252, 252, 252);
+    margin-bottom: 1rem;
 }
