@@ -1,6 +1,4 @@
-# Store this code in 'app.py' file
-
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, request 
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -13,10 +11,17 @@ app = Flask(__name__, template_folder='templates')
 
 app.secret_key = 'your secret key'
 
+# app.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
+# app.config['MYSQL_USER'] = 'b1c81d9b028a9f'
+# app.config['MYSQL_PASSWORD'] = 'a4323524'
+# app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'newmysql1'
+app.config['MYSQL_PASSWORD'] = 'Nooraim@18'
 app.config['MYSQL_DB'] = 'taskware'
+
+
 
 mysql = MySQL(app)
 
@@ -52,9 +57,11 @@ def login():
             session['username'] = account['username']
             msg = 'Logged in successfully !'
             return render_template('dashboard.html', msg=msg)
+        if 'loggedin' in session:
+            return redirect('dashboard.html')
         else:
             msg = 'Incorrect username / password !'
-    return render_template('dashboard.html', msg=msg)
+    return render_template('login.html', msg=msg)
 
 
 @app.route('/logout')
@@ -62,7 +69,7 @@ def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
-    return redirect(url_for('main'))
+    return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -171,6 +178,45 @@ def saveContact():
     return redirect(url_for('contacts'))
 
 
+# Here is the route for the delete note from the database
+
+@app.route('/delete-note/<int:note_id>', methods=['DELETE'])
+def deleteNote(note_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("DELETE FROM notes WHERE id = %s", (note_id,))
+    mysql.connection.commit()
+    return redirect(url_for('contacts'))
+
+# Here is the route for the edit note from the database using PUT operation
+
+@app.route('/update-note/<int:note_id>', methods=['PUT'])
+def update_note(note_id):
+    requestData = request.get_json()
+    text = requestData.get('text')
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
+        "UPDATE notes SET text = %s WHERE id = %s", (text, note_id))
+    mysql.connection.commit()
+    return redirect(url_for('notes'))
+
+@app.route('/search-contact', methods=['POST'])
+def searchContact():
+    search_name = request.form['search_name']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
+        "SELECT * FROM contacts WHERE name LIKE %s", ("%" + search_name + "%",))
+    contacts = cursor.fetchall()
+    return render_template('contacts.html', contacts=contacts)
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
+    
+    
+    
+    
+# xhr.open("POST", "https://taskware.herokuapp.com/save-note", true);
