@@ -11,15 +11,11 @@ app = Flask(__name__, template_folder='templates')
 
 app.secret_key = 'your secret key'
 
-# app.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
-# app.config['MYSQL_USER'] = 'b1c81d9b028a9f'
-# app.config['MYSQL_PASSWORD'] = 'a4323524'
-# app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
+app.config['MYSQL_HOST'] = 'us-cdbr-east-06.cleardb.net'
+app.config['MYSQL_USER'] = 'b1c81d9b028a9f'
+app.config['MYSQL_PASSWORD'] = 'a4323524'
+app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Nooraim@18'
-app.config['MYSQL_DB'] = 'taskware'
 
 
 
