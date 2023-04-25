@@ -26,15 +26,15 @@
     <header>
       <nav>
         <div class="brand">
-          <a href="main.html"><img src="logo.png" class="logo" /></a>
+          <a href="main.html"><img src="/static/logo.png" class="logo" /></a>
         </div>
         <ul>
-          <li><a class="nav-link" href="main">HOME</a></li>
-          <li><a class="nav-link" href="about">ABOUT</a></li>
-          <li><a class="nav-link" href="services">SERVICES</a></li>
-          <li><a class="nav-link" href="connect">CONNECT</a></li>
-          <li><a class="nav-link" href="dashboard">DASHBOARD</a></li>
-        </ul>
+          <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
+          <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
+          <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
+          <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
+          <li><a class="nav-link" href="{{url_for('main')}}">LOGOUT</a></li>
+      </ul>
       </nav>
     </header>
 
@@ -42,7 +42,7 @@
       <section class="top-section">
         <div class="top-bar">
           <i class="ri-inbox-archive-fill"></i>
-          <p>welcome back, ✨<u>USER</u>✨</p>
+          <p>welcome back, ✨<u>{{session.username}}</u>✨</p>
 
           <div class="datetime-box">
             <p class="date"><span id="month"></span> <span id="day"></span></p>
@@ -77,28 +77,28 @@
               <p>some</p>
             </div>
             <ul>
-              <a href="dashboard.html">
+              <a href="{{url_for('dashboard')}}">
                 <li class="aside-item"><i class="ri-macbook-line"></i>home</li>
               </a>
-              <a href="calendar.html">
+              <a href="{{url_for('calendar')}}">
                 <li class="aside-item">
                   <i class="ri-calendar-fill"></i>calendar
                 </li>
               </a>
-              <a href="toDo.html">
+              <a href="{{url_for('toDo')}}">
                 <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
               </a>
-              <a href="notes.html">
+              <a href="{{url_for('notes')}}">
                 <li class="aside-item">
                   <i class="ri-sticky-note-fill"></i>notes
                 </li>
               </a>
-              <a href="pomodoro.html">
+              <a href="{{url_for('pomodoro')}}">
                 <li class="aside-item">
                   <i class="ri-timer-fill"></i>pomodoro timer
                 </li>
               </a>
-              <a href="contacts.html">
+              <a href="{{url_for('contacts')}}">
                 <li class="aside-item aside-active">
                   <i class="ri-contacts-book-2-fill"></i>contacts
                 </li>
@@ -106,38 +106,42 @@
             </ul>
             <div class="sidebar-footer">
               <div class="footer-item">
-                <i class="ri-play-mini-fill"></i>
-                <a href="#">to-do list</a>
+                  <i class="ri-play-mini-fill"></i>
+                  <a href="{{url_for('profile')}}">Setting</a>
               </div>
               <div class="footer-item">
                 <i class="ri-play-mini-fill"></i>
-                <a href="#">account</a>
+                <a href="{{ url_for('main') }}" class="btn">Logout</a>
               </div>
-
-              <input
-                id="command"
-                class="command-input"
-                type="text"
-                placeholder="Type '/' for commands"
-              />
+              
+              <form class="search-form">
+                  <input type="text" name="search" placeholder="Search...">
+                  <button id="submit">Submit</button>
+              </form>
+              
             </div>
           </div>
         </aside>
         <article class="content-containr">
           <!-- code here -->
-          <input type="search" name="search" id="search" placeholder="Search Here"/>
-          
-          <!-- code here -->
           <!-- start -->
           <div class="contacts-container">
-              <input type="text" name="name" id="name" placeholder="Enter name here"/>
-              <input type="text" name="contact" id="contact" placeholder="Enter number here"/>
-              <button id="save-contact-btn">Save</button>
+            <input type="text" name="name" id="name" placeholder="Enter name here"/>
+            <input type="text" name="contact" id="contact" placeholder="Enter number here"/>
+            <button id="save-contact-btn">Save</button>
         </div>
 
 
           <div class="main">
             {% block body %}
+            
+            <form method="POST" action="{{ url_for('searchContact') }}">
+              <div id='search-with-button'>
+                <input type="text" name="search_name" placeholder="Search Contact by Name" id='search-bar-style'/>
+                <button type="submit" id='search-btn'>Search</button>
+              </div>
+            </form>
+            
             <table>
               <tr>
                 <th>Name</th>
@@ -148,31 +152,33 @@
                 <td>{{ contact.name }}</td>
                 <td id="fade">{{ contact.contact }}</td>
               </tr>
-              {% endfor %} {% endblock %}
+              {% endfor %} 
+              {% endblock %}
             </table>
           </div>
         </article>
       </section>
     </main>
-    <script src="dashboard.js"></script>
+    <script src="{{url_for('static', filename='dashboard.js')}}"></script>
     <script>
         const name = document.getElementById("name");
         const contact = document.getElementById("contact");
         const saveNoteBtn = document.getElementById("save-contact-btn");
-  
-        
-  
-       
-  
+
         saveNoteBtn.addEventListener("click", () => {
           const contacts = {
             name: name.value,
             contact: contact.value,
           };
-  
+          
+          if (name.value.trim() === "" || contact.value.trim() === "") {
+            alert("Please enter both a name and a contact number.");
+            return; // exit the function without submitting the form
+          }
           // make an AJAX request to the server-side script
           const xhr = new XMLHttpRequest();
-          xhr.open("POST", "http://127.0.0.1:5000/save-contact", true);
+        //xhr.open("POST", "https://taskware.herokuapp.com/save-contact", true);
+        xhr.open("POST", "http://127.0.0.1:5000/save-contact", true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.onload = () => {
             if (xhr.status === 200) {
