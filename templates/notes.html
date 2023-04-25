@@ -23,14 +23,14 @@
     <header>
       <nav>
         <div class="brand">
-          <a href="main.html"><img src="logo.png" class="logo" /></a>
+          <a href="main.html"><img src="/static/logo.png" class="logo" /></a>
         </div>
         <ul>
-          <li><a class="nav-link" href="main">HOME</a></li>
-          <li><a class="nav-link" href="about">ABOUT</a></li>
-          <li><a class="nav-link" href="services">SERVICES</a></li>
-          <li><a class="nav-link" href="connect">CONNECT</a></li>
-          <li><a class="nav-link" href="dashboard">DASHBOARD</a></li>
+          <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
+          <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
+          <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
+          <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
+          <li><a class="nav-link" href="{{url_for('main')}}">LOGOUT</a></li>
         </ul>
       </nav>
     </header>
@@ -39,7 +39,7 @@
       <section class="top-section">
         <div class="top-bar">
           <i class="ri-inbox-archive-fill"></i>
-          <p>welcome back, ✨<u>USER</u>✨</p>
+          <p>welcome back, ✨<u>{{session.username}}</u>✨</p>
 
           <div class="datetime-box">
             <p class="date"><span id="month"></span> <span id="day"></span></p>
@@ -105,21 +105,19 @@
             </ul>
             <div class="sidebar-footer">
               <div class="footer-item">
-                <i class="ri-play-mini-fill"></i>
-                <a href="#">to-do list</a>
+                  <i class="ri-play-mini-fill"></i>
+                  <a href="{{url_for('profile')}}">Setting</a>
               </div>
               <div class="footer-item">
-                <i class="ri-play-mini-fill"></i>
-                <a href="#">account</a>
+                  <i class="ri-play-mini-fill"></i>
+                  <a href="{{url_for('main')}}" class="btn">Logout</a>
               </div>
-
-              <input
-                id="command"
-                class="command-input"
-                type="text"
-                placeholder="Type '/' for commands"
-              />
-            </div>
+              <form class="search-form">
+                  <input type="text" name="search" placeholder="Search...">
+                  <button id="submit">Submit</button>
+              </form>
+               
+          </div>
           </div>
         </aside>
         <article class="content-container">
@@ -145,9 +143,15 @@
             <h1>Notes</h1>
             {% block body %}
             <ul>
-              {% for priority in ['low', 'medium', 'high'] %}
+              {% for priority in ['high', 'medium', 'low'] %}
                 {% for note in notes if note.priority == priority %}
-                  <li class="priority-{{ note.priority }}">{{ note.text }}</li>
+                  <li id='note-{{ note.id }}' class="priority-{{ note.priority }}">
+                    <span class='note-text'>{{ note.text }}</span> 
+                    <span class='edit-span' data-note-id='{{ note.id }}'>✍️</span>
+                    <span class='save-span' data-note-id='{{ note.id }}' style='display: none;'>💾</span>
+                    <span class='cancel-span' data-note-id='{{ note.id }}' style='display: none;'>❌</span>
+                    <span class='delete-span' data-note-id='{{ note.id }}'>🗑️</span>
+                  </li>
                 {% endfor %}
               {% endfor %}
             </ul>
@@ -158,7 +162,7 @@
       </section>
     </main>
 
-    <script src="dashboard.js"></script>
+    <<script src="{{url_for('static', filename='dashboard.js')}}"></script>
     <!-- start -->
     <!-- end -->
     <script>
@@ -179,15 +183,19 @@
         noteText.value = "";
         priority.value = "low";
       });
-
+      
       saveNoteBtn.addEventListener("click", () => {
         const note = {
           text: noteText.value,
           priority: priority.value,
         };
-
+        if (noteText.value.trim() === "" || priority.value.trim() === "") {
+          alert("Please enter the note and select a priority.");
+          return; // exit the function without submitting the form
+        }
         // make an AJAX request to the server-side script
         const xhr = new XMLHttpRequest();
+        
         xhr.open("POST", "http://127.0.0.1:5000/save-note", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.onload = () => {
@@ -203,6 +211,79 @@
         noteText.value = "";
         priority.value = "low";
       });
+
+      // Here is the JavaScript Code to delete note
+        document.addEventListener('DOMContentLoaded', function() {
+          const deleteSpans = document.querySelectorAll('.delete-span');
+          for (let i = 0; i < deleteSpans.length; i++) {
+            deleteSpans[i].addEventListener('click', function() {
+              const noteId = this.dataset.noteId;
+              const xhr = new XMLHttpRequest();
+              xhr.open('DELETE', '/delete-note/' + noteId);
+              xhr.onload = function() {
+                if (xhr.status === 200) {
+                  const noteElement = document.querySelector('#note-' + noteId);
+                  noteElement.parentNode.removeChild(noteElement);
+                } else {
+                  console.log('Error deleting note.');
+                }
+              };
+              xhr.send();
+            });
+          }
+        });
+
+        // here is the code for the edit a note 
+
+          document.addEventListener('DOMContentLoaded', function() {
+            const editSpans = document.querySelectorAll('.edit-span');
+            for (let i = 0; i < editSpans.length; i++) {
+              editSpans[i].addEventListener('click', function() {
+                const noteId = this.dataset.noteId;
+                const noteTextSpan = document.querySelector('#note-' + noteId + ' .note-text');
+                const saveSpan = document.querySelector('#note-' + noteId + ' .save-span');
+                const cancelSpan = document.querySelector('#note-' + noteId + ' .cancel-span');
+                const editInput = document.createElement('input');
+                editInput.type = 'text';
+                editInput.value = noteTextSpan.innerText;
+                noteTextSpan.parentNode.insertBefore(editInput, noteTextSpan);
+                noteTextSpan.style.display = 'none';
+                saveSpan.style.display = 'inline';
+                cancelSpan.style.display = 'inline';
+                this.style.display = 'none';
+                saveSpan.addEventListener('click', function() {
+                  const updatedText = editInput.value;
+                  const xhr = new XMLHttpRequest();
+                  xhr.open('PUT', '/update-note/' + noteId);
+                  xhr.setRequestHeader('Content-Type', 'application/json');
+                  xhr.onload = function() {
+                    if (xhr.status === 200) {
+                      noteTextSpan.innerText = updatedText;
+                      noteTextSpan.style.display = 'inline';
+                      editInput.parentNode.removeChild(editInput);
+                      saveSpan.style.display = 'none';
+                      cancelSpan.style.display = 'none';
+                      document.querySelector('#note-' + noteId + ' .edit-span').style.display = 'inline';
+                    } else {
+                      console.log('Error updating note.');
+                    }
+                  };
+                  const data = JSON.stringify({ text: updatedText });
+                  xhr.send(data);
+                });
+                cancelSpan.addEventListener('click', function() {
+                  noteTextSpan.style.display = 'inline';
+                  editInput.parentNode.removeChild(editInput);
+                  saveSpan.style.display = 'none';
+                  cancelSpan.style.display = 'none';
+                  document.querySelector('#note-' + noteId + ' .edit-span').style.display = 'inline';
+                });
+              });
+            }
+          });
+        
+        
+      
     </script>
     <script>
       function activeLink(link) {
