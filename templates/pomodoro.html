@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pomodoro Timer</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
@@ -102,15 +102,292 @@
                             <input type="text" name="search" placeholder="Search...">
                             <button id="submit">Submit</button>
                         </form>
-                         
+
                     </div>
                 </div>
             </aside>
+
+
+            <style>
+                .content-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .tab-navigation {
+                    display: flex;
+                }
+
+                .tab-navigation-btn {
+                    background-color: #f1f1f1;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    padding: 10px;
+                    margin-right: 10px;
+                    font-size: 16px;
+                    border-radius: 4px 4px 0 0;
+                }
+
+                .tab-navigation-btn.active {
+                    background-color: #ddd;
+                }
+
+                .tab-content {
+                    display: none;
+                }
+
+                .tab-content.active {
+                    display: block;
+                }
+
+                .timer-display {
+                    font-size: 4rem;
+                    text-align: center;
+                    font-family: sans-serif;
+                }
+
+                .timer-display span {
+                    display: inline-block;
+                    width: 3rem;
+                    text-align: center;
+                    background-color: #f1f1f1;
+                    border-radius: 4px;
+                    font-size: 2rem;
+                    line-height: 3rem;
+                }
+
+                .timer-title {
+                    color: #545d5a;
+                    font-size: 2rem;
+                    margin: 10px 0;
+                    text-align: center;
+                    font-family: sans-serif;
+                }
+
+                .timer-controls {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 1rem;
+                }
+
+                .timer-control-btn {
+                    background-color: #f1f1f1;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    padding: 0.5rem 1rem;
+                    margin: 0 0.5rem;
+                    font-size: 1.2rem;
+                    border-radius: 4px;
+                }
+
+                .timer-control-btn:hover {
+                    background-color: #ddd;
+                }
+
+                .tab-navigation-btn.active {
+                    background-color: #fff;
+                    border-bottom: 2px solid #333;
+                    color: #333;
+                }
+
+                .tab-navigation-btn:hover {
+                    background-color: #ddd;
+                    color: #333;
+                }
+            </style>
+
+
             <article class="content-container">
 
-                <!-- code here -->
+                <div class="tab-navigation">
+                    <button class="tab-navigation-btn active" data-tab="pomodoro">Pomodoro</button>
+                    <button class="tab-navigation-btn" data-tab="long-break">Long Break</button>
+                    <button class="tab-navigation-btn" data-tab="short-break">Short Break</button>
+                </div>
+
+                <div class="tab-content" id="pomodoro">
+                    <div class="timer">
+                        <h2 class="timer-title">Pomodoro</h2>
+                        <div class="timer-display">
+                            <span class="timer-minutes">25</span>:<span class="timer-seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button class="timer-control-btn start">Start</button>
+                            <button class="timer-control-btn reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="long-break">
+                    <div class="timer">
+                        <h2 class="timer-title">Long Break</h2>
+                        <div class="timer-display">
+                            <span class="timer-minutes">15</span>:<span class="timer-seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button class="timer-control-btn start">Start</button>
+                            <button class="timer-control-btn reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="short-break">
+                    <div class="timer">
+                        <h2 class="timer-title">Short Break</h2>
+                        <div class="timer-display">
+                            <span class="timer-minutes">5</span>:<span class="timer-seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button class="timer-control-btn start">Start</button>
+                            <button class="timer-control-btn reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                    const timers = [
+                        {
+                            title: "Pomodoro",
+                            startMinutes: 25,
+                            minutes: 25,
+                            seconds: 0,
+                            isRunning: false,
+                            timerElement: null,
+                            intervalId: null,
+                        },
+                        {
+                            title: "Long Break",
+                            startMinutes: 15,
+                            minutes: 15,
+                            seconds: 0,
+                            isRunning: false,
+                            timerElement: null,
+                            intervalId: null,
+                        },
+                        {
+                            title: "Short Break",
+                            startMinutes: 5,
+                            minutes: 5,
+                            seconds: 0,
+                            isRunning: false,
+                            timerElement: null,
+                            intervalId: null,
+                        },
+                    ];
+
+                    const tabs = document.querySelectorAll('.tab-navigation-btn');
+                    const tabContents = document.querySelectorAll('.tab-content');
+
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Set the active tab
+                            document.querySelector('.tab-navigation-btn.active').classList.remove('active');
+                            tab.classList.add('active');
+
+                            // Hide all tab content
+                            tabContents.forEach(tabContent => {
+                                tabContent.classList.remove('active');
+                            });
+
+                            // Show the selected tab content
+                            const tabId = tab.getAttribute('data-tab');
+                            document.getElementById(tabId).classList.add('active');
+                        });
+                    });
+
+                    // Set the active tab content to pomodoro on page load
+                    document.getElementById('pomodoro').classList.add('active');
+
+
+                    function init() {
+                        timers.forEach((timer, index) => {
+                            const timerElement = document.getElementsByClassName("timer")[index];
+                            const startButton = timerElement.querySelector(".start");
+                            const resetButton = timerElement.querySelector(".reset");
+                            const minutesElement = timerElement.querySelector(".timer-minutes");
+                            const secondsElement = timerElement.querySelector(".timer-seconds");
+                            const titleElement = timerElement.querySelector(".timer-title");
+
+                            timer.timerElement = timerElement;
+
+                            titleElement.textContent = timer.title;
+                            minutesElement.textContent = timer.minutes.toString().padStart(2, "0");
+                            secondsElement.textContent = timer.seconds.toString().padStart(2, "0");
+
+                            startButton.addEventListener("click", () => {
+                                startTimer(timer);
+                            });
+
+                            resetButton.addEventListener("click", () => {
+                                resetTimer(timer);
+                            });
+                        });
+                    }
+
+                    function startTimer(timer) {
+                        const startButton = timer.timerElement.querySelector(".start");
+
+                        if (timer.isRunning) {
+                            clearInterval(timer.intervalId);
+                            timer.isRunning = false;
+                            startButton.textContent = "Start";
+                            return;
+                        }
+
+                        timer.isRunning = true;
+                        startButton.textContent = "Pause";
+
+                        timer.intervalId = setInterval(() => {
+                            if (timer.seconds === 0) {
+                                if (timer.minutes === 0) {
+                                    clearInterval(timer.intervalId);
+                                    timer.isRunning = false;
+                                    startButton.textContent = "Start";
+                                    return;
+                                } else {
+                                    timer.minutes--;
+                                    timer.seconds = 59;
+                                }
+                            } else {
+                                timer.seconds--;
+                            }
+
+                            const minutesElement = timer.timerElement.querySelector(".timer-minutes");
+                            const secondsElement = timer.timerElement.querySelector(".timer-seconds");
+
+                            minutesElement.textContent = timer.minutes.toString().padStart(2, "0");
+                            secondsElement.textContent = timer.seconds.toString().padStart(2, "0");
+                        }, 1000);
+                    }
+
+
+                    function resetTimer(timer) {
+                        clearInterval(timer.intervalId);
+                        timer.isRunning = false;
+                        timer.minutes = timer.startMinutes;
+                        timer.seconds = 0;
+
+                        const minutesElement = timer.timerElement.querySelector(".timer-minutes");
+                        const secondsElement = timer.timerElement.querySelector(".timer-seconds");
+                        const startButton = timer.timerElement.querySelector(".start");
+
+                        minutesElement.textContent = timer.minutes.toString().padStart(2, "0");
+                        secondsElement.textContent = timer.seconds.toString().padStart(2, "0");
+                        startButton.textContent = "Start";
+                    }
+
+
+                    init();
+
+
+                </script>
 
             </article>
+
         </section>
     </main>
     <script src="{{url_for('static', filename='dashboard.js')}}"></script>
