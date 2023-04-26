@@ -117,14 +117,24 @@ def calendar():
     return render_template('calendar.html')
 
 
-@app.route('/notes')
+'''@app.route('/notes')
 def notes():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * from notes order by created_at desc')
     notes = cursor.fetchall()
     if notes:
         print(notes)
-    return render_template('notes.html', notes=notes)
+    return render_template('notes.html', notes=notes)'''
+
+@app.route('/notes')
+def notes():
+    if 'loggedin' in session:
+        user_id = session['id']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM notes WHERE user_id = %s ORDER BY created_at DESC', (user_id,))
+        notes = cursor.fetchall()
+        return render_template('notes.html', notes=notes)
+    return redirect(url_for('login'))
 
 @app.route('/contacts')
 def contacts():
@@ -151,7 +161,7 @@ def pomodoro():
     return render_template('pomodoro.html')
 
 
-@app.route('/save-note', methods=['POST'])
+'''@app.route('/save-note', methods=['POST'])
 def saveNote():
     requestData = request.get_json()
     priority = requestData.get('priority')
@@ -159,6 +169,18 @@ def saveNote():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute(
         "insert into notes(text, priority) value (%s,%s)", (text, priority))
+    mysql.connection.commit()
+    return redirect(url_for('notes'))'''
+
+@app.route('/save-note', methods=['POST'])
+def saveNote():
+    requestData = request.get_json()
+    priority = requestData.get('priority')
+    text = requestData.get('text')
+    user_id = session['id']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
+        "INSERT INTO notes(text, priority, user_id) VALUES (%s,%s,%s)", (text, priority, user_id))
     mysql.connection.commit()
     return redirect(url_for('notes'))
 
