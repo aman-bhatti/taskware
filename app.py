@@ -138,12 +138,15 @@ def notes():
 
 @app.route('/contacts')
 def contacts():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * from contacts order by name asc')
-    contacts = cursor.fetchall()
-    if contacts:
-        print(contacts)
-    return render_template('contacts.html', contacts=contacts)
+    if 'loggedin' in session:
+        user_id = session['id']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM contacts WHERE user_id = %s ORDER BY name asc', (user_id,))
+        #cursor.execute('SELECT * from contacts order by name asc')
+        contacts = cursor.fetchall()
+        if contacts:
+            print(contacts)
+        return render_template('contacts.html', contacts=contacts)
 
 
 # @app.route('/contacts')
@@ -189,9 +192,10 @@ def saveContact():
     requestData = request.get_json()
     contact = requestData.get('contact')
     name = requestData.get('name')
+    user_id = session['id']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute(
-        "insert into contacts(name, contact) value (%s,%s)", (name, contact))
+        "insert into contacts(name, contact, user_id) VALUES (%s,%s,%s)", (name, contact, user_id))
     mysql.connection.commit()
     return redirect(url_for('contacts'))
 
