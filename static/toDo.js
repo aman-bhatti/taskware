@@ -46,32 +46,23 @@ function addTodo(todo){
 
 
 function updateTodo(){
-    
-
     let task  = document.querySelectorAll('.task')
 
     task.forEach((t) => {
-        // console.log(t.children)
         t.addEventListener('click', e =>{
-
             if(e.target.classList.contains('rename-task')){
-                
-                console.log('rename')
                 if (t.children[0].disabled){
                     t.children[0].disabled = false
                 }
-            }else if(e.target.classList.contains('del-task')) {
+            } else if(e.target.classList.contains('del-task')) {
                 t.remove()
-            }
-            
-            else if (e.target.classList.contains('update-task')){
-                console.log(t.children[0].disabled)
+                alert('Task is complete') // add this line to show an alert when a task is removed
+            } else if (e.target.classList.contains('update-task')){
                 if (t.children[0].disabled == false){
                     t.children[0].disabled = true
                 }
             }
         })
-
     })
-    
 }
+
