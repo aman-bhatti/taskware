@@ -24,7 +24,8 @@
                 <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
                 <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
                 <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
-                <li><a class="nav-link" href="{{url_for('main')}}">LOGOUT</a></li>
+                <li><a class="nav-link" href="{{url_for('logout')}}">LOGOUT</a></li>
+                
             </ul>
         </nav>
     </header>
@@ -71,13 +72,13 @@
                     </div>
                     <ul>
                         <a href="{{url_for('dashboard')}}">
-                            <li class="aside-item aside-active"><i class="ri-macbook-line"></i>home</li>
+                            <li class="aside-item aside-active"><i class="ri-macbook-line"></i>dashboard</li>
                         </a>
                         <a href="{{url_for('calendar')}}">
                             <li class="aside-item"><i class="ri-calendar-fill"></i>calendar</li>
                         </a>
                         <a href="{{url_for('toDo')}}">
-                            <li class="aside-item"><i class="ri-task-fill"></i>to-do</li>
+                            <li class="aside-item"><i class="ri-task-fill"></i>tasks</li>
                         </a>
                         <a href="{{url_for('notes')}}">
                             <li class="aside-item"><i class="ri-sticky-note-fill"></i>notes</li>
@@ -96,11 +97,11 @@
                         </div>
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="{{url_for('main')}}" class="btn">Logout</a>
+                            <a href="{{url_for('logout')}}">Logout</a>
                         </div>
-                        <form class="search-form">
-                            <input type="text" name="search" placeholder="Search...">
-                            <button id="submit">Submit</button>
+                        <form class="search-form" method="get" action="{{ url_for('search') }}">
+                            <input type="text" name="q" placeholder="Search...">
+                            <button type="submit">Submit</button>
                         </form>
                          
                     </div>
