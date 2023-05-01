@@ -24,7 +24,9 @@
                 <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
                 <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
                 <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
-                <li><a class="nav-link" href="{{url_for('logout')}}">LOGOUT</a></li>
+                <form action="{{ url_for('logout') }}" method="post">
+                    <button type="submit" id="logoutBut">Logout</button>
+                </form>
             </ul>
         </nav>
     </header>
@@ -96,11 +98,11 @@
                         </div>
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="{{url_for('logout')}}">Logout</a>
+                            <a href="{{ url_for('main') }}" class="btn">Logout</a>
                         </div>
-                        <form class="search-form" method="get" action="{{ url_for('search') }}">
-                            <input type="text" name="q" placeholder="Search...">
-                            <button type="submit">Submit</button>
+                        <form class="search-form">
+                            <input type="text" name="search" placeholder="Search...">
+                            <button id="submit">Submit</button>
                         </form>
                          
                     </div>
@@ -109,41 +111,100 @@
             <article class="content-container">
 
                 <!-- code here -->
-                <div class="container">
-                    <h2>TODO LIST</h2>
-                    <div id="line"></div>
-                    <div class="task-input">
-                        <input type="text" id="add-task" name="todo" placeholder="Add Task..." value="">
-                        <div class="flex-button">
-                            <input type="button" value="➕" name='add' id="add-btn" title="Add Task">
-                            <input type="button" value="❌" name='delete' id="del-btn" title="Remove All Task">
-                        </div>
-                    </div>
-                    <div class="new-tasks">
-                        <!--
-                        <div class="task">
-                            <input type="checkbox" id="complete-task">
-                            <input type="text" id="added-task" disabled value='sd'>
-                            <input type="button" value="✏️" id="rename-task">
-                            <input type="button" value="❌" id="del-task">
-                        </div>
-                    --> 
-                    </div>
-                </div>
-        
-                <script src="toDo.js"></script> 
-            </article>
-        </section>
-    </main>
-    <script src="{{url_for('static', filename='dashboard.js')}}"></script>
-    <script src="{{url_for('static', filename='toDo.js')}}"></script>
+                <h1>Todo List</h1>
+                <form method="POST" action="/add-todo" class="addForm">
+                    <label for="task" class="newTodo">New Todo:</label>
+                    <input type="text" id="taskTodo" name="task">
+                    <button type="submit" id="addTask">Add</button>
+                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="thText">Task</th>
+                        <th class="thText">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todos %}
+                        <tr>
+                            <td id="todoText">
+                                {{ todo.task }}
+                            </td>
+                            <td>
+                                <input type="hidden" name="id" value="{{ todo.id }}">
+                                <a type="button" class="btn btn-danger edit-btn">Edit</a>
+                                <a type="button" class="btn btn-danger delete-btn">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </body>
+            </html>
+            <body>
+            
 
-    <script>
-        function activeLink(link) {
-            $('a').removeClass('active');
-            $(link).addClass('active');
-        }
-    </script>
-</body>
+            <script>
+            
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                const id = button.parentElement.querySelector('input[name="id"]').value;
+                deleteTodo(id);
+                });
+            });
+
+           
+            function deleteTodo(id) {
+                fetch(`/delete/${id}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                    location.reload(); 
+                    }
+                });
+            }
+            
+            function submitEdit(id) {
+            const form = document.querySelector(`#editModal${id} form`);
+            const formData = new FormData(form);
+            fetch(`/edit-todo/${id}`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                if (response.ok) {
+                    location.reload(); 
+                }
+                });
+            }
+            const editButtons = document.querySelectorAll('.edit-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                const id = button.parentElement.querySelector('input[name="id"]').value;
+                const task = button.parentElement.parentElement.querySelector('td:first-child').textContent.trim();
+                editTodoPrompt(id, task);
+                });
+            });
+
+            function editTodoPrompt(id, currentTask) {
+                const newTask = prompt('Enter the new task:', currentTask);
+                if (newTask !== null && newTask.trim() !== '') {
+                editTodoNew(id, newTask.trim());
+                }
+            }
+
+            function editTodoNew(id, newTask) {
+                fetch(`/edit/${id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ task: newTask })
+                })
+                .then(response => {
+                if (response.ok) {
+                    location.reload(); 
+                }
+                });
+            }
+            </script>
 
 </html>

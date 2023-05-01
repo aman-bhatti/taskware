@@ -903,3 +903,91 @@ input[type='button']:active{
   input[type="submit"]:hover {
     background-color: #3e8e41;
   }
+
+  
+  th, td {
+	padding: 0.5em;
+	border: 1px solid #ccc;
+  }
+  
+  th {
+	background-color: #f7f7f7;
+	font-weight: normal;
+    color: black;
+  }
+  .addForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  input#taskTodo[type="text"] {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 60%;
+    max-width: 300px;
+  }
+  
+  button#addTask[type="submit"] {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button#logoutBut[type="submit"] {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  table {
+    width: 75%;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .thText {
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  #todoText {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    color: white;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover,
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .newTodo {
+    margin-right: 10px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: medium;
+  }

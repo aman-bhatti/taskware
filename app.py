@@ -33,7 +33,14 @@ def main():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    if 'loggedin' in session:
+        user_id = session['id']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
+        user = cursor.fetchone()
+        return render_template('dashboard.html', user=user)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/calender')
 def calender():
@@ -269,12 +276,42 @@ def contacts():
 
 @app.route('/toDo')
 def toDo():
-    user = get_user_data()
-    # If user is not logged in, redirect to login page
-    if not user:
-        return redirect('/login')
-    # Render dashboard template with user data
-    return render_template('toDo.html', user=user)
+    if 'loggedin' in session:
+        user_id = session['id']
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cur.execute('SELECT * FROM todos WHERE user_id = %s', (user_id,))
+        todos = cur.fetchall()
+        cur.close()
+        return render_template('toDo.html', todos=todos)
+
+@app.route('/add-todo', methods=['POST'])
+def add_todo():
+    todo = request.form['task']
+    user_id = session['id']
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("INSERT INTO todos (task, user_id) VALUES (%s,%s)", (todo, user_id))
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('toDo'))
+
+@app.route('/delete/<int:todo_id>', methods=['POST'])
+def delete_todo(todo_id):
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM todos WHERE id = %s", (todo_id,))
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('toDo'))
+
+@app.route('/edit/<int:id>', methods=['POST'])
+def edit_todo(id):
+    data = request.get_json()
+    new_task = data['task']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('UPDATE todos SET task = %s WHERE id = %s', (new_task, id))
+    mysql.connection.commit()
+    cursor.close()
+    mysql.connection.close()
+    return '', 204
 
 
 @app.route('/pomodoro')
@@ -341,11 +378,9 @@ def searchContact():
     contacts = cursor.fetchall()
     return render_template('contacts.html', contacts=contacts)
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
-    session.pop('loggedin', None)
-    # session.pop('id', None)
-    # session.pop('username', None)
+    session.clear()
     return redirect(url_for('login'))
 
     
