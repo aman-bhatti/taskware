@@ -17,7 +17,8 @@
     <header>
         <nav>
             <div class="brand">
-                <a href="main.html"><img src="logo.png" class="logo"></a>
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
+                        class="logo"></a>
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -104,7 +105,7 @@
                             <input type="text" name="search" placeholder="Search...">
                             <button id="submit">Submit</button>
                         </form>
-                         
+
                     </div>
                 </div>
             </aside>
@@ -119,10 +120,10 @@
                 </form>
                 <table>
                     <thead>
-                    <tr>
-                        <th class="thText">Task</th>
-                        <th class="thText">Actions</th>
-                    </tr>
+                        <tr>
+                            <th class="thText">Task</th>
+                            <th class="thText">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for todo in todos %}
@@ -139,32 +140,34 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                </body>
-            </html>
-            <body>
-            
+</body>
 
-            <script>
-            
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', () => {
+</html>
+
+<body>
+
+
+    <script>
+
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
                 const id = button.parentElement.querySelector('input[name="id"]').value;
                 deleteTodo(id);
-                });
             });
+        });
 
-           
-            function deleteTodo(id) {
-                fetch(`/delete/${id}`, { method: 'POST' })
+
+        function deleteTodo(id) {
+            fetch(`/delete/${id}`, { method: 'POST' })
                 .then(response => {
                     if (response.ok) {
-                    location.reload(); 
+                        location.reload();
                     }
                 });
-            }
-            
-            function submitEdit(id) {
+        }
+
+        function submitEdit(id) {
             const form = document.querySelector(`#editModal${id} form`);
             const formData = new FormData(form);
             fetch(`/edit-todo/${id}`, {
@@ -172,39 +175,39 @@
                 body: formData
             })
                 .then(response => {
-                if (response.ok) {
-                    location.reload(); 
-                }
+                    if (response.ok) {
+                        location.reload();
+                    }
                 });
-            }
-            const editButtons = document.querySelectorAll('.edit-btn');
-            editButtons.forEach(button => {
-                button.addEventListener('click', () => {
+        }
+        const editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
                 const id = button.parentElement.querySelector('input[name="id"]').value;
                 const task = button.parentElement.parentElement.querySelector('td:first-child').textContent.trim();
                 editTodoPrompt(id, task);
-                });
             });
+        });
 
-            function editTodoPrompt(id, currentTask) {
-                const newTask = prompt('Enter the new task:', currentTask);
-                if (newTask !== null && newTask.trim() !== '') {
+        function editTodoPrompt(id, currentTask) {
+            const newTask = prompt('Enter the new task:', currentTask);
+            if (newTask !== null && newTask.trim() !== '') {
                 editTodoNew(id, newTask.trim());
-                }
             }
+        }
 
-            function editTodoNew(id, newTask) {
-                fetch(`/edit/${id}`, {
+        function editTodoNew(id, newTask) {
+            fetch(`/edit/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ task: newTask })
-                })
+            })
                 .then(response => {
-                if (response.ok) {
-                    location.reload(); 
-                }
+                    if (response.ok) {
+                        location.reload();
+                    }
                 });
-            }
-            </script>
+        }
+    </script>
 
-</html>
+    </html>

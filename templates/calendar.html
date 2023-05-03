@@ -18,7 +18,8 @@
     <header>
         <nav>
             <div class="brand">
-                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
+                        class="logo"></a>
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -95,7 +96,7 @@
                     <div class="footer-item">
                         <i class="ri-play-mini-fill"></i>
                         <a href="{{url_for('profile')}}">Setting</a>
-                        
+
                     </div>
                     <div class="footer-item">
                         <i class="ri-play-mini-fill"></i>

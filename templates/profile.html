@@ -17,7 +17,8 @@
     <header>
         <nav>
             <div class="brand">
-                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
+                        class="logo"></a>
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -104,12 +105,12 @@
                             <input type="text" name="q" placeholder="Search...">
                             <button type="submit">Submit</button>
                         </form>
-                         
+
                     </div>
                 </div>
             </aside>
             <article class="content-container">
-                <!-- code here -->          
+                <!-- code here -->
                 <div class="container">
                     <h1>My Profile</h1>
                     <form method="post" action="{{ url_for('deleteUser') }}">

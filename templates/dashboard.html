@@ -10,14 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <header>
         <nav>
             <div class="brand">
-                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
+                        class="logo"></a>
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -27,7 +28,7 @@
                 <form action="{{ url_for('logout') }}" method="post">
                     <button type="submit" id="logoutBut">Logout</button>
                 </form>
-                
+
             </ul>
         </nav>
     </header>
@@ -105,7 +106,7 @@
                             <input type="text" name="q" placeholder="Search...">
                             <button type="submit">Submit</button>
                         </form>
-                         
+
                     </div>
                 </div>
             </aside>

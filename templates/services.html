@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Services</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <style>
         h2 {
-          margin-bottom: 10px;
+            margin-bottom: 10px;
         }
-  
+
         p {
-          margin-top: 10px;
+            margin-top: 10px;
         }
-      </style>
+    </style>
 </head>
+
 <body>
     <div class="banner">
         <div class="navbar">
-            <a href="main.html"><img src="/static/logo.png" class="logo"></a>
+            <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}" class="logo"></a>
             <nav>
                 <ul id='MenuItems'>
                     <li><a href="{{url_for('main')}}">HOME</a></li>
@@ -31,27 +33,42 @@
             <h1>Services</h1>
         </div>
         <div class="centered-white">
-            <p class="paragraph">Taskware is a task management web application that helps you stay organized and focused. With features like upcoming tasks, notes, contacts, and a pomodoro timer, it streamlines your task management process. You can prioritize tasks easily, capture thoughts and ideas in one central location, keep track of important contacts, and improve your productivity and focus with the pomodoro timer.</p>
+            <p class="paragraph">Taskware is a task management web application that helps you stay organized and
+                focused. With features like upcoming tasks, notes, contacts, and a pomodoro timer, it streamlines your
+                task management process. You can prioritize tasks easily, capture thoughts and ideas in one central
+                location, keep track of important contacts, and improve your productivity and focus with the pomodoro
+                timer.</p>
         </div>
 
-        
+
         <div class="container">
             <div class="services">
                 <div class="service">
-                    <a href="{{url_for('toDo')}}"style="color:#ffffff;"><h2>Upcoming Tasks</h2></a>
-                    <p>You'll never miss a deadline again. Stay on top of your tasks and projects by easily viewing what's due in the coming days and weeks.</p>
+                    <a href="{{url_for('toDo')}}" style="color:#ffffff;">
+                        <h2>Upcoming Tasks</h2>
+                    </a>
+                    <p>You'll never miss a deadline again. Stay on top of your tasks and projects by easily viewing
+                        what's due in the coming days and weeks.</p>
                 </div>
                 <div class="service">
-                    <a href="{{url_for('notes')}}"style="color:#ffffff;"><h2>Notes</h2></a>
+                    <a href="{{url_for('notes')}}" style="color:#ffffff;">
+                        <h2>Notes</h2>
+                    </a>
                     <p>Our Note-Taking tool lets you easily capture and organize your ideas, thoughts, and to-do's.</p>
                 </div>
                 <div class="service">
-                    <a href="{{url_for('contacts')}}"style="color:#ffffff;"><h2>Contacts</h2></a>
-                    <p>Our Contact Management tool lets you easily organize and store all of your contacts in one central location.</p>
+                    <a href="{{url_for('contacts')}}" style="color:#ffffff;">
+                        <h2>Contacts</h2>
+                    </a>
+                    <p>Our Contact Management tool lets you easily organize and store all of your contacts in one
+                        central location.</p>
                 </div>
                 <div class="service">
-                    <a href="{{url_for('pomodoro')}}"style="color:#ffffff;"><h2>Pomodoro Timer</h2></a>
-                    <p>The Pomodoro Timer breaks your workday into manageable 25-minute intervals with 5-minute breaks in between.</p>
+                    <a href="{{url_for('pomodoro')}}" style="color:#ffffff;">
+                        <h2>Pomodoro Timer</h2>
+                    </a>
+                    <p>The Pomodoro Timer breaks your workday into manageable 25-minute intervals with 5-minute breaks
+                        in between.</p>
                 </div>
             </div>
         </div>
@@ -62,4 +79,5 @@
         </div>
     </div>
 </body>
+
 </html>
