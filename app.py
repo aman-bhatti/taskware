@@ -407,6 +407,9 @@ def search():
         'pomodoro': '/pomodoro',
         'pomodoro timer': '/pomodoro',
         'tasks': '/toDo',
+        'setting': '/profile',
+        'Setting': '/profile',
+        'logout': '/login',
         # Add more page routes as needed
     }
 
