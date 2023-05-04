@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, request, flash
 from flask_mysqldb import MySQL
+import mysql.connector
 import MySQLdb.cursors
 import re
 from jinja2 import Template
+import mysql.connector
+from datetime import datetime, timedelta
 
 
 app = Flask(__name__, template_folder='templates')
+
 
 
 app.secret_key = 'your secret key'
@@ -19,6 +23,8 @@ app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
 
 
 mysql = MySQL(app)
+
+
 
 
 @app.route('/')
@@ -38,9 +44,30 @@ def dashboard():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
         user = cursor.fetchone()
-        return render_template('dashboard.html', user=user)
+        
+        cursor.execute('SELECT * FROM todos WHERE user_id = %s ORDER BY due_date', (user_id,))
+        todos = cursor.fetchall()
+
+        if request.method == 'POST':
+            # Get list of task IDs to delete
+            task_ids = request.form.getlist('task_checkbox')
+            if task_ids:
+                # Delete selected tasks
+                task_id_str = ','.join([str(id) for id in task_ids])
+                sql = f"DELETE FROM todos WHERE id IN ({task_id_str})"
+                cursor.execute(sql)
+                mysql.connection.commit()
+
+                # flash('Selected tasks deleted successfully!', 'success')
+
+            return redirect(url_for('dashboard'))
+
+        return render_template('dashboard.html', user=user, todos=todos)
+
     else:
         return redirect(url_for('login'))
+
+
 
 @app.route('/calender')
 def calender():
@@ -61,9 +88,9 @@ def login():
             session['id'] = account['id']
             session['username'] = account['username']
             msg = 'Logged in successfully !'
-            return render_template('dashboard.html', msg=msg)
+            return redirect(url_for('dashboard', msg=msg))
         if 'loggedin' in session:
-            return redirect('dashboard.html')
+            return redirect(url_for('dashboard'))
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
@@ -287,9 +314,10 @@ def toDo():
 @app.route('/add-todo', methods=['POST'])
 def add_todo():
     todo = request.form['task']
+    start_date = request.form['due_date']
     user_id = session['id']
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute("INSERT INTO todos (task, user_id) VALUES (%s,%s)", (todo, user_id))
+    cur.execute("INSERT INTO todos (user_id, task, due_date) VALUES (%s, %s, %s)", (user_id, todo, start_date))
     mysql.connection.commit()
     cur.close()
     return redirect(url_for('toDo'))

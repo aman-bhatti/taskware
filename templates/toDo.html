@@ -117,6 +117,8 @@
                     <label for="task" class="newTodo">New Todo:</label>
                     <input type="text" id="taskTodo" name="task">
                     <button type="submit" id="addTask">Add</button>
+                    <label>Due date:</label>
+                    <input type="date" name="due_date"><br>
                 </form>
                 <table>
                     <thead>
@@ -130,6 +132,9 @@
                         <tr>
                             <td id="todoText">
                                 {{ todo.task }}
+                            </td>
+                            <td>
+                                <a type="button" class="btn btn-danger edit-btn">Due Date</a>
                             </td>
                             <td>
                                 <input type="hidden" name="id" value="{{ todo.id }}">
