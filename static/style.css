@@ -13,15 +13,6 @@
     --text-gray: #979797;
 }
 
-.back-arrow {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    margin: 10px;
-    font-size: 50px;
-    text-decoration: none;
-}
-
 body {
     background: var(--primary-color);
     font-family: "Poppins", sans-serif;
@@ -99,16 +90,16 @@ main {
     background: var(--primary-80);
     color: var(--text-white);
     border-radius: 5px;
-    padding: 10px;
+    padding: 0px;
 }
 
 .top-bar u {
-    color: #8e60ba;
+    color: #d18bed;
     text-decoration: none;
 }
 
 .top-bar p {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .ri-inbox-archive-fill {
@@ -554,15 +545,13 @@ select {
     color: red;
 }
 
-#newDiv ul li {
+#newDiv ul li{
     position: relative;
 }
-
-#newDiv ul li span:hover {
-    cursor: pointer;
+#newDiv ul li span:hover{
+ cursor: pointer;
 }
-
-#newDiv ul li input {
+#newDiv ul li input{
     width: 89%;
     background: transparent;
     border: none;
@@ -728,43 +717,43 @@ select {
 
 
 /*search bar*/
-.search-form {
+  .search-form {
     display: flex;
     align-items: center;
     margin: 20px;
-}
-
-.search-form input[type="text"] {
+  }
+  
+  .search-form input[type="text"] {
     flex: 1;
     padding: 10px;
     border: none;
     border-bottom: 2px solid #ccc;
     font-size: 16px;
-}
-
-.search-form button[id="submit"] {
+  }
+  
+  .search-form button[id="submit"] {
     padding: 5px;
     background-color: #397a3b;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
-}
-
-.search-form button[id="submit"]:hover {
+  }
+  
+  .search-form button[id="submit"]:hover {
     background-color: #2d582e;
-}
+  }
 
 
-/* remove later if doesnt work*/
+  /* remove later if doesnt work*/
 
-.msg,
+  .msg,
 .reg-info,
 #bottom-info {
     color: white;
 }
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -775,7 +764,7 @@ select {
     font-family: Poppins, sans-serif;
 }*/
 
-.container {
+.container{
     margin: 0 auto;
     text-align: center;
     width: 80%;
@@ -784,27 +773,25 @@ select {
     color: rgb(252, 248, 248);
 }
 
-#line {
-    width: 50px;
-    height: 4px;
+#line{
+    width:50px;
+    height:4px;
     background-color: white;
     margin: 0 auto;
     border-radius: 10px;
     margin-bottom: 20px;
 
 }
-
-.flex-button {
+.flex-button{
     display: inline;
     justify-content: center;
     align-items: center;
 }
 
-input {
-    border: none;
+input{
+    border:none;
 }
-
-input[type='text'] {
+input[type='text']{
     width: 40%;
     padding: 10px;
     outline: none;
@@ -812,72 +799,66 @@ input[type='text'] {
     margin-right: -4px;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
-    cursor: pointer;
+    cursor:pointer;
 }
-
-input[type='text']:disabled {
-    cursor: default;
+input[type='text']:disabled{
+    cursor:default;
     color: rgb(227, 213, 213);
     background-color: rgb(147, 135, 135);
 }
-
-input[type='button'] {
+input[type='button']{
     padding: 10px;
     font-size: 1.2rem;
-    color: white;
+    color:white;
     margin: 0 -3px;
 }
-
-#add-btn {
+#add-btn{
     margin-right: -4px;
     background-color: #e9adad;
 }
 
-#del-btn {
+#del-btn{
     background-color: #540a0a;
 }
 
-input[type='button']:active {
+input[type='button']:active{
     transform: scale(.94);
 }
 
 
-.new-tasks {
+.new-tasks{
     margin: 25px auto;
 }
-
-.update-task {
+.update-task{
     margin-left: 10px;
     background-color: #158c47;
 }
-
-.rename-task {
+.rename-task{
     background-color: #e9adad;
 }
 
 
-.del-task {
+.del-task{
     background-color: #540a0a;
 }
 
-.task {
+.task{
     width: 100%;
     margin: 10px auto;
     display: flex;
     justify-content: center;
-
+    
 }
 
 
 @media screen and (max-width:450px) {
-    .task {
+    .task{
         display: inline;
     }
-
-    .flex-button {
+    .flex-button{
         display: block;
-
-        width: 100%;
+        
+    width: 100%;
     }
 }
 
@@ -887,119 +868,114 @@ input[type='button']:active {
     padding: 50px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-h1 {
+  }
+  
+  h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: rgb(250, 250, 250);
-}
-
-label {
+    color:rgb(250, 250, 250);
+  }
+  
+  label {
     display: block;
     margin-bottom: 10px;
-}
-
-/*
+  }
+  /*
   input[type="text"],*/
-input[type="email"],
-input[type="password"] {
+  input[type="email"],
+  input[type="password"] {
     width: 40%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-input[type="submit"] {
+  }
+  
+  input[type="submit"] {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-input[type="submit"]:hover {
+  }
+  
+  input[type="submit"]:hover {
     background-color: #3e8e41;
-}
+  }
 
-
-th,
-td {
-    padding: 0.5em;
-    border: 1px solid #ccc;
-}
-
-th {
-    background-color: #f7f7f7;
-    font-weight: normal;
+  
+  th, td {
+	padding: 0.5em;
+	border: 1px solid #ccc;
+  }
+  
+  th {
+	background-color: #f7f7f7;
+	font-weight: normal;
     color: black;
-}
-
-.addForm {
+  }
+  .addForm {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-}
-
-input#taskTodo[type="text"] {
+  }
+  
+  input#taskTodo[type="text"] {
     padding: 0.5rem;
     margin-right: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 60%;
     max-width: 300px;
-}
-
-button#addTask[type="submit"] {
+  }
+  
+  button#addTask[type="submit"] {
     padding: 0.5rem 1rem;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-button#logoutBut[type="submit"] {
+  }
+  button#logoutBut[type="submit"] {
     padding: 0.5rem 1rem;
     background-color: #9932CC;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-nav form {
+  }
+  nav form {
     display: inline-block;
     margin-top: 8px;
-
-}
-
-table {
+    
+  }
+  
+  table {
     width: 75%;
     border-collapse: collapse;
     text-align: center;
     margin: 0 auto;
-}
-
-.thText {
+  }
+  
+  .thText {
     text-align: center;
     padding: 0.5rem;
     background-color: #007bff;
     color: #fff;
-}
-
-
-#todoText {
+  }
+  
+  
+  #todoText {
     padding: 0.5rem;
     border-bottom: 1px solid #ccc;
     color: white;
-}
-
-.edit-btn,
-.delete-btn {
+  }
+  
+  .edit-btn,
+  .delete-btn {
     display: inline-block;
     padding: 0.25rem 0.5rem;
     margin-right: 0.5rem;
@@ -1008,16 +984,16 @@ table {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.edit-btn:hover,
-.delete-btn:hover {
+  }
+  
+  .edit-btn:hover,
+  .delete-btn:hover {
     background-color: #c82333;
-}
-
-.newTodo {
+  }
+  
+  .newTodo {
     margin-right: 10px;
     margin-top: 10px;
     font-weight: 500;
     font-size: medium;
-}
+  }
