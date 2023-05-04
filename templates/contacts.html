@@ -102,11 +102,6 @@
               <i class="ri-play-mini-fill"></i>
               <a href="{{url_for('profile')}}">Setting</a>
             </div>
-            <div class="footer-item">
-              <form action="{{ url_for('logout') }}" method="post">
-                <button type="submit" id="logoutBut">Logout</button>
-              </form>
-            </div>
 
             <form class="search-form" method="get" action="{{ url_for('search') }}">
               <input type="text" name="q" placeholder="Search...">

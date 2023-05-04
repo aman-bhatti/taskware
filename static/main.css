@@ -26,7 +26,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #FFFFFF;
 }
 
 .navbar ul li {
@@ -115,14 +114,14 @@ body {
     line-height: 25px;
 }
 
-.log-info{
+.log-info {
     color: white;
 }
 
 .loginbtn {
     display: block;
-    margin: 40px auto;
-    padding: 15px 60px;
+    margin: 20px auto;
+    padding: 15px 50px;
     text-align: center;
     border-radius: 25px;
     font-weight: bold;
@@ -133,6 +132,11 @@ body {
     overflow: hidden;
     font-size: 20px;
 }
+
+#log.loginbtn {
+    margin-top: 50px;
+}
+
 
 .loginbtn:hover {
     border-color: white;
@@ -274,6 +278,7 @@ span {
     margin-left: 85px;
     margin-top: 20px;
 }
+
 h1 {
     text-align: center;
     padding: 2px;
@@ -301,6 +306,7 @@ h1 {
 .paragraph {
     margin-bottom: 5px;
 }
+
 .center {
     display: flex;
     justify-content: center;
@@ -336,6 +342,5 @@ h1 {
 
 .service:hover {
     background-color: #9932CC;
-    
-}
 
+}
