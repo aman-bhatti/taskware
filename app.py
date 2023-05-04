@@ -61,12 +61,16 @@ def dashboard():
                 # flash('Selected tasks deleted successfully!', 'success')
 
             return redirect(url_for('dashboard'))
-
-        return render_template('dashboard.html', user=user, todos=todos)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        if account:
+            login_count = account['login_count']
+        return render_template('dashboard.html', user=user, todos=todos , login_count = login_count)
 
     else:
         return redirect(url_for('login'))
-
 
 
 
@@ -76,14 +80,21 @@ def calendar():
     cur.execute("SELECT id, task, due_date FROM todos WHERE user_id = %s", (session['id'],))
     tasks = {}
     for task in cur.fetchall():
-        date_str = task[2].strftime('%Y-%m-%d')
-        if date_str not in tasks:
-            tasks[date_str] = []
-        tasks[date_str].append({'id': task[0], 'title': task[1]})
+        if task[2] is not None:
+            date_str = task[2].strftime('%Y-%m-%d')
+            if date_str not in tasks:
+                tasks[date_str] = []
+            tasks[date_str].append({'id': task[0], 'title': task[1]})
 
     cur.close()
     print(tasks)
-    return render_template('calendar.html', tasks=tasks)
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+    account = cursor.fetchone()
+    if account:
+        login_count = account['login_count']
+    return render_template('calendar.html', tasks=tasks , login_count = login_count)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -103,6 +114,11 @@ def login():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
+            if 'login_count' not in session:
+                session['login_count'] = 1
+                cursor.execute(
+                    'UPDATE users SET login_count = login_count + 1 WHERE id = %s', (session['id'],))
+                mysql.connection.commit()
             msg = 'Logged in successfully !'
             return redirect(url_for('dashboard', msg=msg))
         if 'loggedin' in session:
@@ -132,8 +148,13 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
         else:
-            cursor.execute(
-                'INSERT INTO users VALUES (NULL, % s, % s, % s)', (username, password, email,))
+        
+        # Set default login count to 0
+            login_count = 0
+
+        # Insert user data into database
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO users (username, password, email, login_count) VALUES (%s, %s, %s, %s)', (username, password, email, login_count))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
@@ -227,7 +248,7 @@ def deleteUser():
 
             session.pop('loggedin', None)
         # Render profile page with pre-populated form fields
-        return redirect('/logout')
+        return redirect('/login')
         # return render_template('profile.html', user=user)
 
     # If user is not logged in, redirect to login page
@@ -285,7 +306,13 @@ def notes():
         notes = cursor.fetchall()
         if notes:
             print(notes)
-    return render_template('notes.html', user=user , notes=notes)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        if account:
+            login_count = account['login_count']    
+    return render_template('notes.html', user=user , notes=notes , login_count = login_count)
 
 @app.route('/contacts')
 def contacts():
@@ -304,8 +331,13 @@ def contacts():
         contacts = cursor.fetchall()
         if contacts:
             print(contacts)
-        return render_template('contacts.html', user=user , contacts=contacts)
-
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        if account:
+            login_count = account['login_count']
+        return render_template('contacts.html', user=user , contacts=contacts , login_count = login_count)
 
 
 @app.route('/toDo')
@@ -316,7 +348,13 @@ def toDo():
         cur.execute('SELECT * FROM todos WHERE user_id = %s', (user_id,))
         todos = cur.fetchall()
         cur.close()
-        return render_template('toDo.html', todos=todos)
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        if account:
+            login_count = account['login_count']
+        return render_template('toDo.html', todos=todos , login_count = login_count)
 
 @app.route('/add-todo', methods=['POST'])
 def add_todo():
@@ -364,12 +402,17 @@ def edit_todo(id):
 
 @app.route('/pomodoro')
 def pomodoro():
-    user = get_user_data()
-    # If user is not logged in, redirect to login page
-    if not user:
-        return redirect('/login')
-    # Render dashboard template with user data
-    return render_template('pomodoro.html', user=user)
+    if 'loggedin' in session:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            'SELECT login_count FROM users WHERE id = %s', (session['id'],))
+        account = cursor.fetchone()
+        if account:
+            login_count = account['login_count']
+            return render_template('pomodoro.html', login_count=login_count)
+        else:
+            return redirect('/')
+    return redirect('/login')
 
 @app.route('/save-note', methods=['POST'])
 def saveNote():
@@ -448,6 +491,7 @@ def search():
         'profile': '/profile',
         'dashboard': '/dashboard',
         'contact': '/contact',
+        'contacts': '/contact',
         'about': '/about',
         'notes': '/notes',
         'calendar': '/calendar',
