@@ -129,7 +129,7 @@
                            
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="closeForm()">Close</button>
                             <form method="POST" action="/add-calendar-todo" class="addForm">
                                 <input type="text" id="taskTodo" name="task">
                                 <button type="submit" id="addTask">Add</button>
@@ -215,6 +215,11 @@
         });
 
     </script>
+    <script>
+        function closeForm() {
+            document.getElementById("add-task-form").style.display = "none";
+        }
+        </script>
 </body>
 
 </html>
