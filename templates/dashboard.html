@@ -145,34 +145,59 @@
                           <th></th>
                           <th>Task Name</th>
                           <th>Due Date</th>
-                        
                         </tr>
                       </thead>
                       <tbody>
                         {% for todo in todos %}
-                          <tr>
-                            <td><input type="checkbox" name="task_checkbox" value="{{ todo.id }}"></td>
-                            <td>{{ todo.task }}</td>
-                            <td>{{ todo.due_date.strftime('%Y-%m-%d') }}</td>
-                           
-                          </tr>
-                          
+                        <tr>
+                          <td><input type="checkbox" name="task_checkbox" value="{{ todo.id }}"></td>
+                          <td id="todoText" onclick="toggleTask(this)">{{ todo.task }}</td>
+                          <td id="todoText">{{ todo.due_date.strftime('%Y-%m-%d') }}</td>
+                        </tr>
                         {% endfor %}
                       </tbody>
                     </table>
-                    <button class="deletebtn" type="submit">Delete Selected Tasks</button>
                   </form>
+                  
+                  
+                  
 
             </article>
         </section>
     </main>
     <script src="{{url_for('static', filename='dashboard.js')}}"></script>
     <script>
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.parentElement.querySelector('input[name="id"]').value;
+                deleteTodo(id);
+            });
+        });
+
+
+        function deleteTodo(id) {
+            fetch(`/delete/${id}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    }
+                });
+        }
+    </script>
+    <script>
         function activeLink(link) {
             $('a').removeClass('active');
             $(link).addClass('active');
         }
     </script>
+    <script>
+        function toggleTask(element) {
+          element.style.textDecoration = element.style.textDecoration === "line-through" ? "none" : "line-through";
+          element.style.textDecorationColor = "red";
+          element.style.textDecorationThickness = "4px";
+        }
+      </script>
 </body>
 
 </html>

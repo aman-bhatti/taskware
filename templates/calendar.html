@@ -18,8 +18,7 @@
     <header>
         <nav>
             <div class="brand">
-                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
-                        class="logo"></a>
+                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -96,7 +95,7 @@
                     <div class="footer-item">
                         <i class="ri-play-mini-fill"></i>
                         <a href="{{url_for('profile')}}">Setting</a>
-
+                        
                     </div>
                     <div class="footer-item">
                         <i class="ri-play-mini-fill"></i>
@@ -113,6 +112,42 @@
             <div id='calendar'></div>
         </article>
         </section>
+
+      <!--newly added-->
+      <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog"
+             aria-labelledby="addTaskModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ url_for('add_calendar_todo') }}" method="POST" id="add-task-form" style="display:none; position:absolute; z-index:1; background-color:#fff; padding:10px;">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="task-date" class="col-form-label">Date:</label>
+                                <input type="text" class="form-control" id="task-date" name="date" readonly>
+                                <input type="date" id="selected-date" name="due_date" style="display:none"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="task-title" class="col-form-label">Title:</label>
+                            </div>
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form method="POST" action="/add-calendar-todo" class="addForm">
+                                <input type="text" id="taskTodo" name="task">
+                                <button type="submit" id="addTask">Add</button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script>
@@ -124,6 +159,15 @@
             calendar.render();
         });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectedDateEl = document.getElementById('selected-date');
+            selectedDateEl.addEventListener('change', function () {
+                var selectedDate = selectedDateEl.value;
+                calendar.gotoDate(selectedDate);
+            });
+            });
+
+
     </script>
     <script src="{{url_for('static', filename='dashboard.js')}}"></script>
     <script>
@@ -131,6 +175,53 @@
             $('a').removeClass('active');
             $(link).addClass('active');
         }
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                    dateClick: function (info) {
+                        // document.getElementById('task-date').value = info.dateStr;
+                        // alert("show");
+                        // $('#addTaskModal').modal('show');
+                        // alert("showed")
+                        // dateClick: function(info) {
+            var selectedDateEl = document.getElementById('selected-date');
+            selectedDateEl.value = info.dateStr;
+            var form = document.getElementById('add-task-form');
+            form.elements.date.value = info.dateStr;
+            form.style.display = 'block';
+            form.style.left = (info.dayEl.offsetLeft + 200) + 'px';
+            form.style.top = (info.dayEl.offsetTop + form.offsetHeight) + 'px';
+            // form.style.left = (info.dayEl.offsetLeft + 20) + 'px';
+            // form.style.top = (info.dayEl.offsetTop - form.offsetHeight+20) + 'px';
+        //   },
+
+                },
+
+
+         
+                events: [
+    {% for date_str, tasks in tasks.items() %}
+        {% for task in tasks %}
+        {
+            title: '{{ task.title }}',
+            start: '{{ date_str }}',
+            allDay: true,
+            {% if task.description %}
+            description: '{{ task.description }}',
+            {% endif %}
+        },
+        {% endfor %}
+    {% endfor %}
+],
+            });
+            calendar.render();
+        });
+
     </script>
 </body>
 

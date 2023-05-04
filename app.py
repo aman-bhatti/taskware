@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, request, flash
 from flask_mysqldb import MySQL
+import mysql.connector
 import MySQLdb.cursors
 import re
 from jinja2 import Template
+import mysql.connector
 from datetime import datetime, timedelta
 
 
@@ -18,7 +20,11 @@ app.config['MYSQL_PASSWORD'] = 'a4323524'
 app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
 
 
+
+
 mysql = MySQL(app)
+
+
 
 
 @app.route('/')
@@ -63,9 +69,21 @@ def dashboard():
 
 
 
-@app.route('/calender')
-def calender():
-    return render_template('calender.html')
+
+@app.route('/calendar')
+def calendar():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT id, task, due_date FROM todos WHERE user_id = %s", (session['id'],))
+    tasks = {}
+    for task in cur.fetchall():
+        date_str = task[2].strftime('%Y-%m-%d')
+        if date_str not in tasks:
+            tasks[date_str] = []
+        tasks[date_str].append({'id': task[0], 'title': task[1]})
+
+    cur.close()
+    print(tasks)
+    return render_template('calendar.html', tasks=tasks)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -244,16 +262,7 @@ def services():
     return render_template('services.html')
 
 
-@app.route('/calendar')
-def calendar():
-    user = get_user_data()
 
-    # If user is not logged in, redirect to login page
-    if not user:
-        return redirect('/login')
-
-    # Render dashboard template with user data
-    return render_template('calendar.html', user=user)
 
 
 @app.route('/notes')
@@ -315,6 +324,19 @@ def add_todo():
     mysql.connection.commit()
     cur.close()
     return redirect(url_for('toDo'))
+
+@app.route('/add-calendar-todo', methods=['POST'])
+def add_calendar_todo():
+    todo = request.form['task']
+    start_date = request.form['due_date']
+    user_id = session['id']
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("INSERT INTO todos (user_id, task, due_date) VALUES (%s, %s, %s)", (user_id, todo, start_date))
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('calendar'))
+
+
 
 @app.route('/delete/<int:todo_id>', methods=['POST'])
 def delete_todo(todo_id):
@@ -404,6 +426,7 @@ def searchContact():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
 
     
 @app.route('/search')

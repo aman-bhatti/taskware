@@ -116,14 +116,16 @@
                 <form method="POST" action="/add-todo" class="addForm">
                     <label for="task" class="newTodo">New Todo:</label>
                     <input type="text" id="taskTodo" name="task">
-                    <button type="submit" id="addTask">Add</button>
-                    <label>Due date:</label>
                     <input type="date" name="due_date"><br>
+                    <button type="submit" id="addTask" >Add</button>
+                    
+                    
                 </form>
                 <table>
                     <thead>
                         <tr>
                             <th class="thText">Task</th>
+                            <th class="thText">Due Date</th>
                             <th class="thText">Actions</th>
                         </tr>
                     </thead>
@@ -134,7 +136,7 @@
                                 {{ todo.task }}
                             </td>
                             <td>
-                                <a type="button" class="btn btn-danger edit-btn">Due Date</a>
+                                <a type="text" class="btn btn-danger edit-btn">{{ todo.due_date }}</a>
                             </td>
                             <td>
                                 <input type="hidden" name="id" value="{{ todo.id }}">
