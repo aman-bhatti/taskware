@@ -15,7 +15,11 @@ body {
     cursor: pointer;
 }
 
-
+.type {
+    color: #958a9f;
+    font-size: 13px;
+    letter-spacing: 8px;
+}
 
 .navbar {
     position: relative;
@@ -119,7 +123,8 @@ body {
 }
 
 .loginbtn {
-    display: block;
+    display: inline-block;
+
     margin: 20px auto;
     padding: 15px 50px;
     text-align: center;
@@ -134,9 +139,13 @@ body {
 }
 
 #log.loginbtn {
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-right: 20px;
 }
 
+#reg.loginbtn {
+    background-color: #593d74;
+}
 
 .loginbtn:hover {
     border-color: white;
