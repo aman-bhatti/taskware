@@ -87,6 +87,10 @@ def calendar():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    if 'loggedin' in session:
+        return redirect(url_for('dashboard'))
+
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
@@ -425,7 +429,7 @@ def searchContact():
 @app.route('/logout', methods=['POST'])
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('main'))
 
 
     

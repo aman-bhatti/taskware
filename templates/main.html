@@ -20,6 +20,7 @@
           <li><a href="{{url_for('about')}}">ABOUT</a></li>
           <li><a href="{{url_for('services')}}">SERVICES</a></li>
           <li><a href="{{url_for('connect')}}">CONNECT</a></li>
+          <li><a href="{{url_for('dashboard')}}">DASHBOARD</a></li>
         </ul>
       </nav>
     </div>
@@ -28,6 +29,9 @@
       <p>Slogan</p>
     </div>
     <div>
+      <button class="loginbtn" onclick="window.location.href='{{url_for('login')}}';" style="width: auto">
+        LOGIN
+      </button>
       <button class="loginbtn" onclick="window.location.href='{{url_for('register')}}';" style="width: auto">
         REGISTER
       </button>

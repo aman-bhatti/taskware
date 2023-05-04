@@ -749,7 +749,7 @@ select {
 
   .msg,
 .reg-info,
-.bottom-info {
+#bottom-info {
     color: white;
 }
 
@@ -941,11 +941,16 @@ input[type='button']:active{
   }
   button#logoutBut[type="submit"] {
     padding: 0.5rem 1rem;
-    background-color: #007bff;
+    background-color: #9932CC;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  }
+  nav form {
+    display: inline-block;
+    margin-top: 8px;
+    
   }
   
   table {
