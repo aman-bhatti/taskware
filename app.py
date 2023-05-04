@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, request, flash
 from flask_mysqldb import MySQL
-import mysql.connector
 import MySQLdb.cursors
 import re
 from jinja2 import Template
-import mysql.connector
 from datetime import datetime, timedelta
 
 
@@ -20,11 +18,7 @@ app.config['MYSQL_PASSWORD'] = 'a4323524'
 app.config['MYSQL_DB'] = 'heroku_b673ba97fe8636f'
 
 
-
-
 mysql = MySQL(app)
-
-
 
 
 @app.route('/')
