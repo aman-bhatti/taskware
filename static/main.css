@@ -276,3 +276,61 @@ h1 {
     color: rgb(252, 252, 252);
     margin-bottom: 1rem;
 }
+
+.centered-white {
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+
+.contact-info {
+    text-align: center;
+    margin-top: -10px;
+    font-size: 18px;
+    color: white;
+}
+
+.paragraph {
+    margin-bottom: 5px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -20px;
+}
+
+.service {
+    flex: 1;
+    margin: 10px;
+    padding: 100px;
+    background-color: #3f0873;
+    color: #FFFFFF;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.service:hover {
+    background-color: #9932CC;
+    
+}
