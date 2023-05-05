@@ -396,8 +396,7 @@ def edit_todo(id):
     cursor.execute('UPDATE todos SET task = %s WHERE id = %s', (new_task, id))
     mysql.connection.commit()
     cursor.close()
-    mysql.connection.close()
-    return '', 204
+    return redirect(url_for('toDo'))
 
 
 @app.route('/pomodoro')
