@@ -167,9 +167,12 @@
                             <input type="checkbox" name="completed" onchange="handleCheckboxChange(event)" data-id="{{ todo.id }}">
 
                           </td>
+                            {% if todo.due_date %}
                           <td id="todoText" onclick="toggleTask(this)">{{ todo.task }}</td>
                           <td id="todoText">{{ todo.due_date.strftime('%Y-%m-%d') }}</td>
                         </tr>
+                        {% else %}
+                        {% endif %}
                         {% endfor %}
                       </tbody>
                     </table>
