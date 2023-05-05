@@ -168,9 +168,6 @@ pycodestyle==2.10.0
 pycparser==2.21
 pydantic==1.10.7
 pyflakes==3.0.1
-pygame==2.1.2
-Pygments==2.14.0
-pymdown-extensions==9.11
 PyMySQL==1.0.2
 pynvim==0.4.3
 pyOpenSSL==23.1.1
