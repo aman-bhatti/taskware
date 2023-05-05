@@ -11,22 +11,15 @@ body {
 }
 
 .logo {
-    width: 80px;
+    width: 120px;
     cursor: pointer;
-}
-
-.type {
-    color: #958a9f;
-    font-size: 13px;
-    letter-spacing: 8px;
 }
 
 .navbar {
     position: relative;
-    width: 100%;
-    height: 8%;
+    width: 97%;
     margin: auto;
-    padding: 25px 40px;
+    padding: 35px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,7 +28,7 @@ body {
 .navbar ul li {
     list-style: none;
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 20px;
     position: relative;
 }
 
@@ -118,19 +111,10 @@ body {
     line-height: 25px;
 }
 
-<<<<<<< HEAD
-.log-info{
-=======
-.log-info {
->>>>>>> Frontend
-    color: white;
-}
-
 .loginbtn {
-    display: inline-block;
-
-    margin: 20px auto;
-    padding: 15px 50px;
+    display: block;
+    margin: 40px auto;
+    padding: 15px 60px;
     text-align: center;
     border-radius: 25px;
     font-weight: bold;
@@ -140,15 +124,6 @@ body {
     cursor: pointer;
     overflow: hidden;
     font-size: 20px;
-}
-
-#log.loginbtn {
-    margin-top: 30px;
-    margin-right: 20px;
-}
-
-#reg.loginbtn {
-    background-color: #593d74;
 }
 
 .loginbtn:hover {
@@ -291,72 +266,11 @@ span {
     margin-left: 85px;
     margin-top: 20px;
 }
-<<<<<<< HEAD
-=======
-
-h1 {
-    text-align: center;
-    padding: 2px;
-    color: rgb(252, 252, 252);
-    margin-bottom: 1rem;
-}
-
-.centered-white {
-    margin-top: 10px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
-}
 
 
-.contact-info {
-    text-align: center;
-    margin-top: 0px;
-    font-size: 18px;
+
+.msg,
+.reg-info,
+.bottom-info {
     color: white;
 }
-
-.paragraph {
-    margin-bottom: 5px;
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-
-
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 50px 20px;
-}
-
-
-.services {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -40px;
-}
-
-.service {
-    flex: 1;
-    margin: 10px;
-    padding: 100px;
-    background-color: #3f0873;
-    color: #FFFFFF;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.service:hover {
-    background-color: #9932CC;
-
-}
->>>>>>> Frontend

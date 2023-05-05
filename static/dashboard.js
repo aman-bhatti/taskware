@@ -9,7 +9,7 @@ $(document).ready(function () {
         }
     });
     $("#plus-btn").click(function () {
-        if (streakCounter < 10) {
+        if (streakCounter < 10000) {
             streakCounter = streakCounter + 1;
             $("#streak-counter").text(streakCounter.toString());
         }

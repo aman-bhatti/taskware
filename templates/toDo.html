@@ -11,20 +11,29 @@
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   
+      
 </head>
 
 <body>
     <header>
         <nav>
             <div class="brand">
+<<<<<<< HEAD
                 <a href="main.html"><img src="/static/logo.png" class="logo"></a>
+=======
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
+                        class="logo"></a>
+>>>>>>> Frontend
             </div>
             <ul>
-                <li><a class="nav-link" href="{{url_for('main')}}">HOME</a></li>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
                 <li><a class="nav-link" href="{{url_for('services')}}">SERVICES</a></li>
                 <li><a class="nav-link" href="{{url_for('connect')}}">CONNECT</a></li>
                 <li><a class="nav-link" href="{{url_for('dashboard')}}">DASHBOARD</a></li>
+                <form action="{{ url_for('logout') }}" method="post">
+                    <button type="submit" id="logoutBut">Logout</button>
+                </form>
             </ul>
         </nav>
     </header>
@@ -33,7 +42,7 @@
         <section class="top-section">
             <div class="top-bar">
                 <i class="ri-inbox-archive-fill"></i>
-                <p>welcome back, ✨<u>{{session.username}}</u>✨</p>
+                <p>welcome back, <u>{{session.username}}</u></p>
 
                 <div class="datetime-box">
                     <p class="date">
@@ -64,20 +73,20 @@
                         <h3>Streak⚡</h3>
                         <div class="btn-container">
                             <button id="minus-btn">-</button>
-                            <h3 id="streak-counter"></h3>
+                            <h3>{{ login_count }}</h3>
                             <button id="plus-btn">+</button>
                         </div>
                         <p>some</p>
                     </div>
                     <ul>
                         <a href="{{url_for('dashboard')}}">
-                            <li class="aside-item"><i class="ri-macbook-line"></i>home</li>
+                            <li class="aside-item"><i class="ri-macbook-line"></i>dashboard</li>
                         </a>
                         <a href="{{url_for('calendar')}}">
                             <li class="aside-item"><i class="ri-calendar-fill"></i>calendar</li>
                         </a>
                         <a href="{{url_for('toDo')}}">
-                            <li class="aside-item aside-active"><i class="ri-task-fill"></i>to-do</li>
+                            <li class="aside-item aside-active"><i class="ri-task-fill"></i>tasks</li>
                         </a>
                         <a href="{{url_for('notes')}}">
                             <li class="aside-item"><i class="ri-sticky-note-fill"></i>notes</li>
@@ -92,31 +101,147 @@
                     <div class="sidebar-footer">
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="#">to-do list</a>
+                            <a href="{{url_for('profile')}}">Setting</a>
                         </div>
-                        <div class="footer-item">
-                            <i class="ri-play-mini-fill"></i>
-                            <a href="#">account</a>
-                        </div>
+                        
+                        <form class="search-form" method="get" action="{{ url_for('search') }}">
+                            <input type="text" name="q" placeholder="Search...">
+                            <button type="submit">Submit</button>
+                        </form>
 
-                        <input id="command" class="command-input" type="text" placeholder="Type '/' for commands">
                     </div>
                 </div>
             </aside>
             <article class="content-container">
 
                 <!-- code here -->
-
-            </article>
-        </section>
-    </main>
-    <script src="{{url_for('static', filename='dashboard.js')}}"></script>
-    <script>
-        function activeLink(link) {
-            $('a').removeClass('active');
-            $(link).addClass('active');
-        }
-    </script>
+                <h1>Todo List</h1>
+                <form method="POST" action="/add-todo" class="addForm">
+                    <label for="task" class="newTodo">New Todo:</label>
+                    <input type="text" id="taskTodo" name="task">
+                    <input type="date" name="due_date"><br>
+                    <button type="submit" id="addTask" >Add</button>
+                    
+                    
+                </form>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="thText">Task</th>
+                            <th class="thText">Due Date</th>
+                            <th class="thText">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todos %}
+                        <tr>
+                            <td id="todoText">
+                                {{ todo.task }}
+                            </td>
+                            <td>
+                                <a type="text" class="btn btn-danger edit-btn">{{ todo.due_date }}</a>
+                            </td>
+                            <td>
+                                <input type="hidden" name="id" value="{{ todo.id }}">
+                                <a type="button" class="btn btn-danger edit-btn">Edit</a>
+                                <a type="button" class="btn btn-danger delete-btn">Complete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 </body>
 
 </html>
+
+<body>
+
+
+    <script>
+
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.parentElement.querySelector('input[name="id"]').value;
+                deleteTodo(id);
+            });
+        });
+
+
+        function deleteTodo(id) {
+    fetch(`/delete/${id}`, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                alert('Task is complete!'); // add this line to show an alert when a task is deleted successfully
+                location.reload();
+            }
+        });
+}
+
+
+        function submitEdit(id) {
+            const form = document.querySelector(`#editModal${id} form`);
+            const formData = new FormData(form);
+            fetch(`/edit-todo/${id}`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    }
+                });
+        }
+        const editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.parentElement.querySelector('input[name="id"]').value;
+                const task = button.parentElement.parentElement.querySelector('td:first-child').textContent.trim();
+                editTodoPrompt(id, task);
+            });
+        });
+
+        function editTodoPrompt(id, currentTask) {
+            const newTask = prompt('Enter the new task:', currentTask);
+            if (newTask !== null && newTask.trim() !== '') {
+                editTodoNew(id, newTask.trim());
+            }
+        }
+
+        function editTodoNew(id, newTask) {
+            fetch(`/edit/${id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ task: newTask })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    }
+                });
+        }
+
+        function updateTodo(){
+    let task  = document.querySelectorAll('.task')
+
+    task.forEach((t) => {
+        t.addEventListener('click', e =>{
+            if(e.target.classList.contains('rename-task')){
+                if (t.children[0].disabled){
+                    t.children[0].disabled = false
+                }
+            } else if(e.target.classList.contains('del-task')) {
+                t.remove()
+                alert('Task is complete') // add this line to show an alert when a task is removed
+            } else if (e.target.classList.contains('update-task')){
+                if (t.children[0].disabled == false){
+                    t.children[0].disabled = true
+                }
+            }
+        })
+    })
+}
+
+    </script>
+
+    </html>

@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Connect page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  <meta charset="UTF-8">
+  <title>Connect page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='connect.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="banner">
         <div class="navbar">
             <a href="main.html"><img src="/static/logo.png" class="logo"></a>
@@ -23,6 +27,181 @@
         <div>
             <h1>Connect Page</h1>
         </div>
+=======
+  <div class="banner">
+    <div class="navbar">
+      <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}" class="logo"></a>
+      <nav>
+        <ul id='MenuItems'>
+          <li><a href="{{url_for('main')}}">HOME</a></li>
+          <li><a href="{{url_for('about')}}">ABOUT</a></li>
+          <li><a href="{{url_for('services')}}">SERVICES</a></li>
+          <li><a href="{{url_for('connect')}}">CONNECT</a></li>
+          <li><a href="{{url_for('dashboard')}}">DASHBOARD</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <h1> </h1>
+      <h1>Connect Page</h1>
+      <h2 id="teamh2"> Get To Know Our Team </h2>
+
+      <body>
+        <section>
+
+          <div class="row">
+            <!-- Column 1-->
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/aman.png" />
+                </div>
+                <h3>Aman Bhatti</h3>
+                <p>Full Stack Developer</p>
+                <div class="icons">
+                  <a href="#">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://www.github.com/aman-bhatti">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:aman.ibhatti13@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Column 2-->
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/aiman.png" />
+                </div>
+                <h3>Aiman Fiaz</h3>
+                <p>Full Stack Developer</p>
+                <div class="icons">
+                  <a href="#">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://github.com/aimanfiaz11">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:aimanfiaz11@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Column 3-->
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/jonathan.png" />
+                </div>
+                <h3>Jonathan Boparai</h3>
+                <p>Full Stack Developer</p>
+                <div class="icons">
+                  <a href="https://www.linkedin.com/in/jonathanboparai/">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://github.com/jonathanboparai">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:jonathanboparai@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/sumaiya.png" />
+                </div>
+                <h3>Sumaiya Ahmed</h3>
+                <p>Computer Engineering Major</p>
+                <div class="icons">
+                  <a href="https://www.linkedin.com/in/sumaiyaahmed2/">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://github.com/sumaiya2848">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:sumaiyahmed2848@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/susan.png" />
+                </div>
+                <h3>Susan Alhariri</h3>
+                <p>Full Stack Developer</p>
+                <div class="icons">
+                  <a href="https://www.linkedin.com/in/susanalhariri/">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://github.com/susanalhariri">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="mailto:susan.alhariri@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="card">
+                <div class="img-container">
+                  <img src="/static/raha.png" />
+                </div>
+                <h3>Sumya Raha</h3>
+                <p>Full Stack Developer</p>
+                <div class="icons">
+                  <a href="#">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="#">
+                    <i class="fas fa-envelope"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </body>
+
+      <style>
+        html {
+          background-color: #160F1D;
+          background-size: cover;
+          background-position: center;
+        }
+
+        .us1 {
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          width: 50%;
+          margin-bottom: 30px;
+        }
+
+        .us2 {
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+          width: 50%;
+        }
+      </style>
+
+    </div>
+>>>>>>> Frontend
 </body>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
@@ -17,12 +17,8 @@
     <header>
         <nav>
             <div class="brand">
-<<<<<<< HEAD
-                <a href="main.html"><img src="/static/logo.png" class="logo"></a>
-=======
                 <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='logo.png') }}"
                         class="logo"></a>
->>>>>>> Frontend
             </div>
             <ul>
                 <li><a class="nav-link" href="{{url_for('about')}}">ABOUT</a></li>
@@ -32,7 +28,6 @@
                 <form action="{{ url_for('logout') }}" method="post">
                     <button type="submit" id="logoutBut">Logout</button>
                 </form>
-
             </ul>
         </nav>
     </header>
@@ -41,7 +36,7 @@
         <section class="top-section">
             <div class="top-bar">
                 <i class="ri-inbox-archive-fill"></i>
-                <p>welcome back, <u>{{session.username}}</u></p>
+                <p>welcome back, ✨<u>{{session.username}}</u>✨</p>
 
                 <div class="datetime-box">
                     <p class="date">
@@ -79,7 +74,7 @@
                     </div>
                     <ul>
                         <a href="{{url_for('dashboard')}}">
-                            <li class="aside-item aside-active"><i class="ri-macbook-line"></i>dashboard</li>
+                            <li class="aside-item"><i class="ri-macbook-line"></i>dashboard</li>
                         </a>
                         <a href="{{url_for('calendar')}}">
                             <li class="aside-item"><i class="ri-calendar-fill"></i>calendar</li>
@@ -100,7 +95,7 @@
                     <div class="sidebar-footer">
                         <div class="footer-item">
                             <i class="ri-play-mini-fill"></i>
-                            <a href="{{url_for('profile')}}">Setting</a>
+                            <a href="{{ url_for('profile') }}" class="btn">Setting</a>
                         </div>
                         
                         <form class="search-form" method="get" action="{{ url_for('search') }}">
@@ -112,113 +107,30 @@
                 </div>
             </aside>
             <article class="content-container">
-
-                <script>
-                    (function (d, s, id) {
-                        if (d.getElementById(id)) {
-                            if (window.__TOMORROW__) {
-                                window.__TOMORROW__.renderWidget();
-                            }
-                            return;
-                        }
-                        const fjs = d.getElementsByTagName(s)[0];
-                        const js = d.createElement(s);
-                        js.id = id;
-                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
-
-                        fjs.parentNode.insertBefore(js, fjs);
-                    })(document, 'script', 'tomorrow-sdk');
-                </script>
-
-                <script>
-                function handleCheckboxChange(event) {
-                if (event.target.checked) {
-                const id = event.target.dataset.id;
-                    fetch(`/delete/${id}`, { method: 'POST' })
-                    .then(response => {
-                if (response.ok) {
-                    alert('Task is complete!');
-                const row = event.target.closest('tr');
-                    row.remove();
-                    }
-                 });
-                }
-                }
-                </script>
-
-                <div class="tomorrow" data-location-id="" data-language="EN" data-unit-system="IMPERIAL"
-                    data-skin="dark" data-widget-type="upcoming" style="padding-bottom:22px;position:relative;">
-                    <a href="https://www.tomorrow.io/weather-api/" rel="nofollow noopener noreferrer" target="_blank"
-                        style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;">
-                        <img alt="Powered by the Tomorrow.io Weather API"
-                            src="https://weather-website-client.tomorrow.io/img/powered-by.svg" width="250"
-                            height="18" />
-                    </a>
+                <!-- code here -->
+                <div class="container">
+                    <h1>My Profile</h1>
+                    <form method="post" action="{{ url_for('deleteUser') }}">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" value="{{ user['username'] }}" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ user['email'] }}" required>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" value="{{ user['password'] }}" required>
+                        <input type="submit" value="Save">
+                    </form>
                 </div>
-                <form method="POST">
-                    <table class="upcomingtable">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Task Name</th>
-                          <th>Due Date</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for todo in todos %}
-                        <tr>
-                          <td>
-                            <input type="checkbox" name="completed" onchange="handleCheckboxChange(event)" data-id="{{ todo.id }}">
-
-                          </td>
-                          <td id="todoText" onclick="toggleTask(this)">{{ todo.task }}</td>
-                          <td id="todoText">{{ todo.due_date.strftime('%Y-%m-%d') }}</td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                  </form>
-                  
-                  
-                  
-                  
 
             </article>
         </section>
     </main>
     <script src="{{url_for('static', filename='dashboard.js')}}"></script>
     <script>
-        const deleteButtons = document.querySelectorAll('.delete-btn');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const id = button.parentElement.querySelector('input[name="id"]').value;
-                deleteTodo(id);
-            });
-        });
-
-
-        function deleteTodo(id) {
-            fetch(`/delete/${id}`, { method: 'POST' })
-                .then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    }
-                });
-        }
-    </script>
-    <script>
         function activeLink(link) {
             $('a').removeClass('active');
             $(link).addClass('active');
         }
     </script>
-    <script>
-        function toggleTask(element) {
-          element.style.textDecoration = element.style.textDecoration === "line-through" ? "none" : "line-through";
-          element.style.textDecorationColor = "red";
-          element.style.textDecorationThickness = "4px";
-        }
-      </script>
 </body>
 
 </html>
